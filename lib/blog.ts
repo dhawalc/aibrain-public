@@ -52,7 +52,7 @@ function toMeta(slug: string, data: Frontmatter, content: string): BlogPostMeta 
     description: data.description ?? excerpt,
     date: data.date ?? new Date().toISOString().slice(0, 10),
     category: data.category ?? 'General',
-    author: data.author ?? 'AI Brain Team',
+    author: data.author ?? 'Dhawal Chheda, AI Leader at Accel4',
     readTime: data.readTime ?? `${Math.max(1, Math.ceil(words / 220))} min read`,
     published: data.published ?? false,
     excerpt: excerpt.length === 150 ? `${excerpt}...` : excerpt,

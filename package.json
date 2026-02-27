@@ -10,6 +10,8 @@
     "trends:scan": "node scripts/trend-finder.mjs",
     "article:generate": "node scripts/article-generator.mjs",
     "pipeline:run": "node scripts/content-pipeline.mjs",
+    "keywords:plan": "node scripts/keywords-plan.mjs",
+    "articles:bulk": "node scripts/articles-bulk-generate.mjs",
     "analytics:discover": "node scripts/analytics-discover.mjs",
     "metrics:ingest": "node scripts/metrics-ingest.mjs"
   },

@@ -62,3 +62,5 @@ Owner: QorSync AI (Accel4)
 - Created GA4 property `QorSync AI Public` (`526301790`) and web stream (`G-50B6DD0M9F`).
 - Added frontend GA tag wiring via `NEXT_PUBLIC_GA_MEASUREMENT_ID`.
 - Added Search Console URL-prefix property for public URL (pending verification).
+- Generated 100 keyword-driven articles via bulk pipeline with publish=true.
+- Added author branding pass: Dhawal Chheda bylines, author page, and article schema updates.

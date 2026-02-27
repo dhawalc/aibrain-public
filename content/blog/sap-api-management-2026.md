@@ -3,7 +3,7 @@ title: "Enterprise API Management for SAP S/4HANA: The 2026 Guide"
 description: "Complete guide to SAP API management, integration patterns, and governance. Learn how Fortune 500 companies expose 800+ SAP APIs securely while maintaining control."
 date: "2026-02-27"
 category: "SAP Integration"
-author: "AI Brain Team"
+author: "Dhawal Chheda, AI Leader at Accel4"
 readTime: "10 min read"
 published: false
 ---

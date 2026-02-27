@@ -3,7 +3,7 @@ title: "How AI is Transforming SAP Discovery: From Weeks to Hours"
 description: "Discover how autonomous AI is revolutionizing enterprise architecture discovery, reducing SAP mapping time from 8-12 weeks to just 2-4 hours"
 date: "2026-02-27"
 category: "SAP Discovery"
-author: "AI Brain Team"
+author: "Dhawal Chheda, AI Leader at Accel4"
 readTime: "8 min read"
 published: false
 ---

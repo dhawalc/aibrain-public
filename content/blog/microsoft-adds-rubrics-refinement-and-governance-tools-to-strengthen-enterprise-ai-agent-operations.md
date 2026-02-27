@@ -3,7 +3,7 @@ title: "Microsoft Adds Rubrics Refinement and Governance Tools to Strengthen Ent
 description: "A practical enterprise architecture discovery guide for autonomous enterprise operations with QorSync AI."
 date: "2026-02-27"
 category: "Enterprise Architecture Discovery"
-author: "QorSync AI Team"
+author: "Dhawal Chheda, AI Leader at Accel4"
 readTime: "8 min read"
 published: false
 ---

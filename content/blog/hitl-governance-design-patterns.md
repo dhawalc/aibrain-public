@@ -3,7 +3,7 @@ title: "Human-in-the-Loop Governance for Agentic Systems"
 description: "Design patterns for approval gates, risk tiers, and audit trails in production-grade enterprise agent systems."
 date: "2026-02-27"
 category: "Governance, Risk & Compliance"
-author: "QorSync AI Team"
+author: "Dhawal Chheda, AI Leader at Accel4"
 readTime: "9 min read"
 published: true
 ---

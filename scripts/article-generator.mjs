@@ -139,7 +139,9 @@ async function main() {
   const topic = getArg('--topic')
   const requestedCategory = getArg('--category', 'Agentic Automation & Orchestration')
   const category = pickCategory(requestedCategory)
-  const author = getArg('--author', 'QorSync AI Team')
+  const author = getArg('--author', 'Dhawal Chheda, AI Leader at Accel4')
+  const publishArg = getArg('--publish', 'false').toLowerCase()
+  const published = publishArg === 'true' || publishArg === '1' || publishArg === 'yes'
   const forceSlug = getArg('--slug')
 
   if (!topic) {
@@ -152,7 +154,7 @@ async function main() {
 
   const generated = (await generateWithOpenAI(topic, category)) || generateFallback(topic, category)
 
-  const markdown = `---\ntitle: "${topic.replace(/"/g, '\\"')}"\ndescription: "${generated.description.replace(/"/g, '\\"')}"\ndate: "${new Date().toISOString().slice(0, 10)}"\ncategory: "${category.replace(/"/g, '\\"')}"\nauthor: "${author.replace(/"/g, '\\"')}"\nreadTime: "8 min read"\npublished: false\n---\n\n${generated.content}\n`
+  const markdown = `---\ntitle: "${topic.replace(/"/g, '\\"')}"\ndescription: "${generated.description.replace(/"/g, '\\"')}"\ndate: "${new Date().toISOString().slice(0, 10)}"\ncategory: "${category.replace(/"/g, '\\"')}"\nauthor: "${author.replace(/"/g, '\\"')}"\nreadTime: "8 min read"\npublished: ${published}\n---\n\n${generated.content}\n`
 
   await mkdir(outDir, { recursive: true })
   await writeFile(outPath, markdown, 'utf-8')

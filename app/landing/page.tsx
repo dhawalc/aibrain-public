@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { AUTHOR_NAME, AUTHOR_PATH, AUTHOR_TITLE } from '@/lib/brand'
 import { REQUEST_DEMO_URL } from '@/lib/site'
 
 export const metadata = {
@@ -236,6 +237,18 @@ export default function LandingPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-20">
+        <div className="mb-10 rounded-2xl border border-slate-800 bg-slate-900/50 p-8">
+          <p className="text-sm uppercase tracking-widest text-[#26AAE3]">From {AUTHOR_NAME}</p>
+          <p className="mt-2 text-lg text-slate-300">
+            “Our focus is simple: let agents handle repetitive operational work, keep humans in control for critical decisions,
+            and deliver measurable outcomes across the enterprise stack.”
+          </p>
+          <p className="mt-3 text-sm text-slate-400">{AUTHOR_TITLE}</p>
+          <Link href={AUTHOR_PATH} className="mt-4 inline-flex text-[#26AAE3] hover:text-cyan-300">
+            Read articles by {AUTHOR_NAME}
+          </Link>
+        </div>
+
         <div className="rounded-3xl bg-gradient-to-br from-cyan-600 to-blue-700 p-12 text-center shadow-2xl shadow-[#1C74BC]/30">
           <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">Run the Autonomous Enterprise with QorSync AI</h2>
           <p className="mx-auto mb-8 max-w-2xl text-xl text-cyan-100">Deploy agents fast, enforce governance, and keep humans in control where it matters most.</p>

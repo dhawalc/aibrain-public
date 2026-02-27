@@ -6,6 +6,7 @@ import rehypeHighlight from 'rehype-highlight'
 import rehypeSanitize from 'rehype-sanitize'
 import remarkGfm from 'remark-gfm'
 import LinkedInCopyButton from '@/components/linkedin-copy-button'
+import { AUTHOR_NAME, AUTHOR_PATH, AUTHOR_TITLE } from '@/lib/brand'
 import { getAllArticles, getArticleBySlug, getRelatedArticles } from '@/lib/blog'
 import { REQUEST_DEMO_URL, SITE_URL } from '@/lib/site'
 
@@ -27,6 +28,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   return {
     title: `${post.title} | QorSync AI Blog`,
     description: post.description,
+    authors: [{ name: AUTHOR_NAME }],
     openGraph: {
       title: post.title,
       description: post.description,
@@ -46,9 +48,29 @@ export default async function BlogPostPage({ params }: { params: Params }) {
 
   const related = await getRelatedArticles(slug)
   const articleUrl = `${SITE_URL}/blog/${slug}`
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      '@type': 'Person',
+      name: AUTHOR_NAME,
+      jobTitle: AUTHOR_TITLE,
+      url: `${SITE_URL}${AUTHOR_PATH}`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Accel4',
+    },
+    mainEntityOfPage: articleUrl,
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <header className="border-b border-slate-800 bg-slate-950/50 backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <Link href="/landing" className="flex items-center gap-3">
@@ -90,7 +112,11 @@ export default async function BlogPostPage({ params }: { params: Params }) {
           {post.description ? <p className="mb-8 text-xl text-slate-300">{post.description}</p> : null}
 
           <div className="flex items-center gap-4 text-sm text-slate-400">
-            <span>{post.author}</span>
+            <Link href={AUTHOR_PATH} className="text-[#26AAE3] hover:text-cyan-300">
+              {AUTHOR_NAME}
+            </Link>
+            <span>•</span>
+            <span>{AUTHOR_TITLE}</span>
             <span>•</span>
             <time>
               {new Date(post.date).toLocaleDateString('en-US', {

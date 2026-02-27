@@ -15,6 +15,8 @@ ${description}
 
 Read more: ${url}
 
+- Dhawal Chheda, AI Leader at Accel4
+
 #QorSyncAI #Accel4 #EnterpriseAI #AgenticAI #Automation`
 }
 

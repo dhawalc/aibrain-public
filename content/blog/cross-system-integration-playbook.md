@@ -3,7 +3,7 @@ title: "Cross-System Integration Playbook for Autonomous Operations"
 description: "How to run one autonomous operating loop across ERP, CRM, ITSM, and data systems without creating new silos."
 date: "2026-02-27"
 category: "Cross-System Integration Patterns"
-author: "QorSync AI Team"
+author: "Dhawal Chheda, AI Leader at Accel4"
 readTime: "8 min read"
 published: true
 ---

@@ -3,7 +3,7 @@ title: "How to Reduce SAP S/4HANA Migration Costs by 60%"
 description: "Proven strategies to cut SAP migration costs from $2M+ to under $800K. Real-world tactics CTOs use to reduce consultant fees, accelerate timelines, and avoid costly surprises."
 date: "2026-02-27"
 category: "SAP Migration"
-author: "AI Brain Team"
+author: "Dhawal Chheda, AI Leader at Accel4"
 readTime: "9 min read"
 published: false
 ---

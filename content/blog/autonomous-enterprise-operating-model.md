@@ -3,7 +3,7 @@ title: "The Autonomous Enterprise Operating Model: What Actually Works in 2026"
 description: "A practical operating model for autonomous enterprise execution with agents, governance, and measurable outcomes."
 date: "2026-02-27"
 category: "Agentic Automation & Orchestration"
-author: "QorSync AI Team"
+author: "Dhawal Chheda, AI Leader at Accel4"
 readTime: "8 min read"
 published: true
 ---
