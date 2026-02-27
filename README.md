@@ -31,6 +31,10 @@ NEXT_PUBLIC_DEMO_EMAIL=dhawal.chheda@accel4.com
 NEXT_PUBLIC_SITE_URL=https://<your-public-service-url>
 OPENAI_API_KEY=<optional>
 OPENAI_MODEL=gpt-5-mini
+GA4_PROPERTY_ID=
+GSC_SITE_URL=
+GCP_QUOTA_PROJECT=aibrain-ceo-live-20260218
+NEXT_PUBLIC_GA_MEASUREMENT_ID=
 ```
 
 ## Content model

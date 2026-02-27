@@ -59,3 +59,6 @@ Owner: QorSync AI (Accel4)
 - Added manual LinkedIn copy-post button requirement to execution scope.
 - Added analytics discovery and metrics ingestion scripts using Google ADC.
 - Captured currently visible GA4/GSC assets and documented setup path.
+- Created GA4 property `QorSync AI Public` (`526301790`) and web stream (`G-50B6DD0M9F`).
+- Added frontend GA tag wiring via `NEXT_PUBLIC_GA_MEASUREMENT_ID`.
+- Added Search Console URL-prefix property for public URL (pending verification).
