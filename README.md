@@ -10,6 +10,7 @@ This service is intentionally public and independent from the private QorSync AI
   - `/landing`
   - `/blog`
   - `/blog/[slug]`
+  - Blog articles include a `Copy LinkedIn Post` helper button for manual posting.
 - Private app remains separate behind Google auth.
 
 ## Local development

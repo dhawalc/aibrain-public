@@ -195,3 +195,10 @@ MVP is complete when:
 - Session resume protocol: `docs/SESSION_BOOTSTRAP_PROTOCOL.md`
 
 If context is lost in future sessions, start by reading those three files.
+
+## 12) MVP Stack Decisions (Locked)
+1. Storage/runtime history: Postgres-first with minimal-cost setup.
+2. Development DB: local Postgres.
+3. Cloud DB: defer paid Cloud SQL; use low/near-zero cost option until traffic justifies upgrade.
+4. Publishing flow: repo-file based publishing (no CMS integration in MVP).
+5. Analytics loop: GA4 + GSC first; external rank tracker deferred.

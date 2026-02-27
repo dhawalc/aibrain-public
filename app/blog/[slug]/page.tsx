@@ -5,8 +5,9 @@ import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeSanitize from 'rehype-sanitize'
 import remarkGfm from 'remark-gfm'
+import LinkedInCopyButton from '@/components/linkedin-copy-button'
 import { getAllArticles, getArticleBySlug, getRelatedArticles } from '@/lib/blog'
-import { REQUEST_DEMO_URL } from '@/lib/site'
+import { REQUEST_DEMO_URL, SITE_URL } from '@/lib/site'
 
 type Params = Promise<{ slug: string }>
 
@@ -44,6 +45,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   }
 
   const related = await getRelatedArticles(slug)
+  const articleUrl = `${SITE_URL}/blog/${slug}`
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900">
@@ -97,6 +99,8 @@ export default async function BlogPostPage({ params }: { params: Params }) {
                 day: 'numeric',
               })}
             </time>
+            <span>•</span>
+            <LinkedInCopyButton title={post.title} description={post.description} url={articleUrl} />
           </div>
         </header>
 

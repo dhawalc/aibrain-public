@@ -40,11 +40,14 @@ Owner: QorSync AI (Accel4)
 1. Start with Node orchestration for speed.
 2. Keep human approval mandatory until quality proves stable.
 3. Keep SAP as one category, not product identity.
+4. Use low-cost Postgres path first: local Postgres for dev, Cloud SQL deferred.
+5. Keep publishing file-based in this repo (no CMS integration in MVP).
+6. Analytics MVP scope: GA4 + GSC only (rank tracker later if needed).
+7. Add manual LinkedIn distribution assist on each article via copy button.
 
 ## Open Questions (Need User Input)
-1. Preferred DB target for run history and vector storage: Supabase vs self-hosted Postgres?
-2. Preferred publishing endpoint long-term: file-based repo commits vs CMS API?
-3. Preferred analytics source of truth: GA4 + GSC only, or include rank tracker now?
+1. Share GA4 and GSC credentials/service-account details when ready.
+2. Confirm whether LinkedIn copy template should include company page URL/tagging format.
 
 ## Work Log
 ### 2026-02-27
@@ -52,3 +55,5 @@ Owner: QorSync AI (Accel4)
 - Repositioned copy to QorSync AI with Accel4 attribution.
 - Updated demo CTA to email workflow.
 - Added this taskboard and master planning docs.
+- Locked MVP stack choices for low-cost implementation.
+- Added manual LinkedIn copy-post button requirement to execution scope.
