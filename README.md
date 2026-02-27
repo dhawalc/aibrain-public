@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Brain Public
 
-## Getting Started
+Public-facing landing and blog service for AI Brain.
 
-First, run the development server:
+## Scope
+
+This service is intentionally public and independent from the private AI Brain application.
+
+- Public routes:
+  - `/landing`
+  - `/blog`
+  - `/blog/[slug]`
+- Private app remains separate behind Google auth.
+
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000/landing and http://localhost:3000/blog.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create `.env.local`:
 
-## Learn More
+```bash
+NEXT_PUBLIC_PRIVATE_APP_URL=https://aibrain-frontend-375423256919.us-central1.run.app
+NEXT_PUBLIC_SITE_URL=https://<your-public-service-url>
+OPENAI_API_KEY=<optional>
+OPENAI_MODEL=gpt-5-mini
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Content model
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Blog posts live under `content/blog/*.md` (or `.mdx`) and must include:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```yaml
+---
+title: "..."
+description: "..."
+date: "2026-02-27"
+category: "SAP Migration"
+author: "AI Brain Team"
+readTime: "8 min read"
+published: true
+---
+```
 
-## Deploy on Vercel
+Only `published: true` posts are rendered.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## SEO
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `app/sitemap.ts` emits landing/blog/post URLs
+- `app/robots.ts` publishes robots policy and sitemap
+
+## Autonomous content pipeline
+
+See [AUTONOMOUS_CONTENT_PIPELINE.md](./AUTONOMOUS_CONTENT_PIPELINE.md).
+
+Quick commands:
+
+```bash
+npm run trends:scan
+npm run pipeline:run
+npm run article:generate -- --topic "SAP API governance in 2026"
+```
+
+Generated articles default to `published: false`.
+
+## Deploy to Cloud Run
+
+```bash
+gcloud run deploy aibrain-public \
+  --source . \
+  --region us-central1 \
+  --allow-unauthenticated
+```
