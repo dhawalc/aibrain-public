@@ -17,7 +17,7 @@ export default async function BlogPage() {
       <header className="border-b border-slate-800 bg-slate-950/50 backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <Link href="/landing" className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 to-blue-600 font-bold text-white">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-[#093E8F] to-[#1C74BC] font-bold text-white">
               Q
             </div>
             <div>
@@ -29,7 +29,7 @@ export default async function BlogPage() {
             <Link href="/landing" className="text-slate-300 transition hover:text-white">
               Home
             </Link>
-            <a href={REQUEST_DEMO_URL} className="rounded-lg bg-cyan-600 px-4 py-2 font-medium text-white transition hover:bg-cyan-700">
+            <a href={REQUEST_DEMO_URL} className="rounded-lg bg-[#093E8F] px-4 py-2 font-medium text-white transition hover:bg-[#0A3F8F]">
               Request Demo
             </a>
           </nav>
@@ -38,7 +38,7 @@ export default async function BlogPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-20 text-center">
         <h1 className="mb-6 text-5xl font-bold text-white">
-          QorSync AI <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Blog</span>
+          QorSync AI <span className="bg-gradient-to-r from-[#26AAE3] to-[#093E8F] bg-clip-text text-transparent">Blog</span>
         </h1>
         <p className="mx-auto max-w-2xl text-xl text-slate-300">
           Practical guidance on autonomous enterprise operations, agent execution, governance, and integration strategy.
@@ -60,11 +60,11 @@ export default async function BlogPage() {
                 className="group rounded-xl border border-slate-800 bg-slate-900/50 p-6 transition-all hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/10"
               >
                 <div className="mb-4 flex items-center gap-3">
-                  <span className="rounded-full bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-400">{post.category}</span>
+                  <span className="rounded-full bg-[#26AAE3]/10 px-3 py-1 text-xs font-medium text-[#26AAE3]">{post.category}</span>
                   <span className="text-xs text-slate-400">{post.readTime}</span>
                 </div>
 
-                <h2 className="mb-3 line-clamp-2 text-xl font-bold text-white transition group-hover:text-cyan-400">{post.title}</h2>
+                <h2 className="mb-3 line-clamp-2 text-xl font-bold text-white transition group-hover:text-[#26AAE3]">{post.title}</h2>
 
                 <p className="mb-4 line-clamp-3 text-sm text-slate-400">{post.excerpt}</p>
 
@@ -76,7 +76,7 @@ export default async function BlogPage() {
                       day: 'numeric',
                     })}
                   </time>
-                  <span className="inline-flex items-center gap-1 text-sm font-medium text-cyan-400 transition group-hover:translate-x-1">
+                  <span className="inline-flex items-center gap-1 text-sm font-medium text-[#26AAE3] transition group-hover:translate-x-1">
                     Read more
                     <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

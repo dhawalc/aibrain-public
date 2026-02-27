@@ -18,7 +18,7 @@ export default function LandingPage() {
       <header className="border-b border-slate-800 bg-slate-950/50 backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 to-blue-600 font-bold text-white">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-[#093E8F] to-[#1C74BC] font-bold text-white">
               Q
             </div>
             <div>
@@ -30,7 +30,7 @@ export default function LandingPage() {
             <Link href="/blog" className="text-slate-300 transition hover:text-white">
               Blog
             </Link>
-            <a href={REQUEST_DEMO_URL} className="rounded-lg bg-cyan-600 px-4 py-2 font-medium text-white transition hover:bg-cyan-700">
+            <a href={REQUEST_DEMO_URL} className="rounded-lg bg-[#093E8F] px-4 py-2 font-medium text-white transition hover:bg-[#0A3F8F]">
               Request Demo
             </a>
           </nav>
@@ -39,14 +39,14 @@ export default function LandingPage() {
 
       <section className="mx-auto grid max-w-7xl items-center gap-12 px-6 py-20 md:grid-cols-2 md:py-32">
         <div>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-sm font-medium text-cyan-400">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#26AAE3]/30 bg-[#26AAE3]/10 px-3 py-1 text-sm font-medium text-[#26AAE3]">
             <span className="h-2 w-2 animate-pulse rounded-full bg-cyan-400" />
             Autonomous Enterprise Control Plane
           </div>
 
           <h1 className="mb-6 text-5xl font-bold leading-tight text-white md:text-6xl">
             Let AI Agents Run
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"> 95% of Enterprise Operations</span>
+            <span className="bg-gradient-to-r from-[#26AAE3] to-[#093E8F] bg-clip-text text-transparent"> 95% of Enterprise Operations</span>
           </h1>
 
           <p className="mb-8 text-xl leading-relaxed text-slate-300">
@@ -57,7 +57,7 @@ export default function LandingPage() {
           <div className="mb-12 flex flex-col gap-4 sm:flex-row">
             <a
               href={REQUEST_DEMO_URL}
-              className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:from-cyan-700 hover:to-blue-700"
+              className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-[#093E8F] to-[#1C74BC] px-6 py-3 font-semibold text-white shadow-lg shadow-[#1C74BC]/30 transition hover:from-[#0A3F8F] hover:to-[#1C74BC]"
             >
               Request Demo
             </a>
@@ -97,7 +97,7 @@ export default function LandingPage() {
                   <div className="font-medium text-white">Agent Orchestration Active</div>
                   <div className="text-sm text-slate-400">Discovery + execution + monitoring</div>
                 </div>
-                <div className="text-sm font-mono text-cyan-400">LIVE</div>
+                <div className="text-sm font-mono text-[#26AAE3]">LIVE</div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
@@ -119,8 +119,8 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              <div className="rounded-lg border border-cyan-500/20 bg-cyan-500/10 p-4">
-                <div className="mb-2 text-xs text-cyan-400">Execution Queue Health</div>
+              <div className="rounded-lg border border-[#26AAE3]/30 bg-[#26AAE3]/10 p-4">
+                <div className="mb-2 text-xs text-[#26AAE3]">Execution Queue Health</div>
                 <div className="h-2 overflow-hidden rounded-full bg-slate-800">
                   <div className="h-full w-5/6 animate-pulse rounded-full bg-gradient-to-r from-cyan-500 to-blue-500" />
                 </div>
@@ -189,7 +189,7 @@ export default function LandingPage() {
                   { title: 'Human Feedback Loop', desc: 'Analyst feedback continuously tunes agent behavior' },
                 ].map((feature) => (
                   <li key={feature.title} className="flex gap-4">
-                    <svg className="mt-1 h-6 w-6 flex-shrink-0 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="mt-1 h-6 w-6 flex-shrink-0 text-[#26AAE3]" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fillRule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -220,13 +220,13 @@ export default function LandingPage() {
                 <div>
                   <div className="mb-2 text-sm text-slate-400">QorSync AI Model</div>
                   <div className="flex items-end gap-3">
-                    <div className="text-4xl font-bold text-cyan-400">Agent-led</div>
+                    <div className="text-4xl font-bold text-[#26AAE3]">Agent-led</div>
                     <div className="mb-1 text-slate-400">with governance</div>
                   </div>
                 </div>
 
-                <div className="rounded-lg border border-cyan-500/20 bg-cyan-500/10 p-4">
-                  <div className="mb-1 font-semibold text-cyan-400">Outcome</div>
+                <div className="rounded-lg border border-[#26AAE3]/30 bg-[#26AAE3]/10 p-4">
+                  <div className="mb-1 font-semibold text-[#26AAE3]">Outcome</div>
                   <div className="text-sm text-slate-300">Faster execution, fewer escalations, and consistent policy compliance.</div>
                 </div>
               </div>
@@ -236,7 +236,7 @@ export default function LandingPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-20">
-        <div className="rounded-3xl bg-gradient-to-br from-cyan-600 to-blue-700 p-12 text-center shadow-2xl shadow-cyan-500/20">
+        <div className="rounded-3xl bg-gradient-to-br from-cyan-600 to-blue-700 p-12 text-center shadow-2xl shadow-[#1C74BC]/30">
           <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">Run the Autonomous Enterprise with QorSync AI</h2>
           <p className="mx-auto mb-8 max-w-2xl text-xl text-cyan-100">Deploy agents fast, enforce governance, and keep humans in control where it matters most.</p>
           <a href={REQUEST_DEMO_URL} className="inline-flex items-center rounded-lg bg-white px-8 py-4 text-lg font-bold text-cyan-700 shadow-xl transition hover:bg-slate-100">

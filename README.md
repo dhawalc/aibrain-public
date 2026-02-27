@@ -26,7 +26,7 @@ Open http://localhost:3000/landing and http://localhost:3000/blog.
 Create `.env.local`:
 
 ```bash
-NEXT_PUBLIC_PRIVATE_APP_URL=https://aibrain-frontend-375423256919.us-central1.run.app
+NEXT_PUBLIC_DEMO_EMAIL=dhawal.chheda@accel4.com
 NEXT_PUBLIC_SITE_URL=https://<your-public-service-url>
 OPENAI_API_KEY=<optional>
 OPENAI_MODEL=gpt-5-mini
@@ -41,8 +41,8 @@ Blog posts live under `content/blog/*.md` (or `.mdx`) and must include:
 title: "..."
 description: "..."
 date: "2026-02-27"
-category: "SAP Migration"
-author: "AI Brain Team"
+category: "Agentic Automation & Orchestration"
+author: "QorSync AI Team"
 readTime: "8 min read"
 published: true
 ---
@@ -64,7 +64,7 @@ Quick commands:
 ```bash
 npm run trends:scan
 npm run pipeline:run
-npm run article:generate -- --topic "SAP API governance in 2026"
+npm run article:generate -- --topic "Human-in-the-loop approval architecture"
 ```
 
 Generated articles default to `published: false`.

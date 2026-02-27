@@ -50,7 +50,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
       <header className="border-b border-slate-800 bg-slate-950/50 backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <Link href="/landing" className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 to-blue-600 font-bold text-white">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-[#093E8F] to-[#1C74BC] font-bold text-white">
               Q
             </div>
             <div>
@@ -62,7 +62,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
             <Link href="/blog" className="text-slate-300 transition hover:text-white">
               Blog
             </Link>
-            <a href={REQUEST_DEMO_URL} className="rounded-lg bg-cyan-600 px-4 py-2 font-medium text-white transition hover:bg-cyan-700">
+            <a href={REQUEST_DEMO_URL} className="rounded-lg bg-[#093E8F] px-4 py-2 font-medium text-white transition hover:bg-[#0A3F8F]">
               Request Demo
             </a>
           </nav>
@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
       </header>
 
       <article className="mx-auto max-w-4xl px-6 py-12">
-        <Link href="/blog" className="mb-8 inline-flex items-center text-cyan-400 transition hover:text-cyan-300">
+        <Link href="/blog" className="mb-8 inline-flex items-center text-[#26AAE3] transition hover:text-cyan-300">
           <svg className="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
@@ -79,7 +79,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
 
         <header className="mb-12">
           <div className="mb-4 flex items-center gap-3">
-            <span className="rounded-full bg-cyan-500/10 px-3 py-1 text-sm font-medium text-cyan-400">{post.category}</span>
+            <span className="rounded-full bg-[#26AAE3]/10 px-3 py-1 text-sm font-medium text-[#26AAE3]">{post.category}</span>
             <span className="text-sm text-slate-400">{post.readTime}</span>
           </div>
 
@@ -111,7 +111,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
               p: ({ ...props }) => <p className="leading-relaxed" {...props} />,
               ul: ({ ...props }) => <ul className="list-disc space-y-2 pl-6" {...props} />,
               ol: ({ ...props }) => <ol className="list-decimal space-y-2 pl-6" {...props} />,
-              a: ({ ...props }) => <a className="text-cyan-400 underline hover:text-cyan-300" {...props} />,
+              a: ({ ...props }) => <a className="text-[#26AAE3] underline hover:text-cyan-300" {...props} />,
               code: ({ className, ...props }) => {
                 const isBlock = Boolean(className)
                 if (isBlock) {
@@ -128,12 +128,12 @@ export default async function BlogPostPage({ params }: { params: Params }) {
           </ReactMarkdown>
         </div>
 
-        <div className="mt-16 rounded-2xl border border-cyan-500/20 bg-gradient-to-r from-cyan-600/10 to-blue-600/10 p-8">
+        <div className="mt-16 rounded-2xl border border-[#26AAE3]/30 bg-gradient-to-r from-cyan-600/10 to-blue-600/10 p-8">
           <h3 className="mb-3 text-2xl font-bold text-white">Ready to Run Autonomous Enterprise Operations?</h3>
           <p className="mb-6 text-slate-300">See how QorSync AI deploys governed agents across your enterprise systems.</p>
           <a
             href={REQUEST_DEMO_URL}
-            className="inline-flex items-center rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 px-6 py-3 font-semibold text-white transition hover:from-cyan-700 hover:to-blue-700"
+            className="inline-flex items-center rounded-lg bg-gradient-to-r from-[#093E8F] to-[#1C74BC] px-6 py-3 font-semibold text-white transition hover:from-[#0A3F8F] hover:to-[#1C74BC]"
           >
             Request Demo
           </a>
