@@ -20,11 +20,11 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const post = await getArticleBySlug(slug)
 
   if (!post) {
-    return { title: 'Post Not Found | AI Brain Blog' }
+    return { title: 'Post Not Found | QorSync AI Blog' }
   }
 
   return {
-    title: `${post.title} | AI Brain Blog`,
+    title: `${post.title} | QorSync AI Blog`,
     description: post.description,
     openGraph: {
       title: post.title,
@@ -51,9 +51,12 @@ export default async function BlogPostPage({ params }: { params: Params }) {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <Link href="/landing" className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 to-blue-600 font-bold text-white">
-              AI
+              Q
             </div>
-            <span className="text-xl font-bold text-white">AI Brain</span>
+            <div>
+              <span className="text-xl font-bold text-white">QorSync AI</span>
+              <p className="text-[10px] uppercase tracking-widest text-slate-400">An Accel4 Product</p>
+            </div>
           </Link>
           <nav className="hidden items-center gap-8 md:flex">
             <Link href="/blog" className="text-slate-300 transition hover:text-white">
@@ -126,8 +129,8 @@ export default async function BlogPostPage({ params }: { params: Params }) {
         </div>
 
         <div className="mt-16 rounded-2xl border border-cyan-500/20 bg-gradient-to-r from-cyan-600/10 to-blue-600/10 p-8">
-          <h3 className="mb-3 text-2xl font-bold text-white">Ready to Transform Your SAP Discovery?</h3>
-          <p className="mb-6 text-slate-300">See how AI Brain can map your entire SAP landscape in hours, not weeks.</p>
+          <h3 className="mb-3 text-2xl font-bold text-white">Ready to Run Autonomous Enterprise Operations?</h3>
+          <p className="mb-6 text-slate-300">See how QorSync AI deploys governed agents across your enterprise systems.</p>
           <a
             href={REQUEST_DEMO_URL}
             className="inline-flex items-center rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 px-6 py-3 font-semibold text-white transition hover:from-cyan-700 hover:to-blue-700"

@@ -4,9 +4,11 @@ import { mkdir, writeFile } from 'fs/promises'
 import path from 'path'
 
 const FEEDS = [
-  'https://news.google.com/rss/search?q=SAP+S%2F4HANA',
-  'https://news.google.com/rss/search?q=enterprise+architecture+AI',
-  'https://news.google.com/rss/search?q=ERP+migration',
+  'https://news.google.com/rss/search?q=enterprise+ai+operations',
+  'https://news.google.com/rss/search?q=agentic+workflow+automation',
+  'https://news.google.com/rss/search?q=erp+crm+integration+strategy',
+  'https://news.google.com/rss/search?q=governance+risk+compliance+automation',
+  'https://news.google.com/rss/search?q=netsuite+oracle+salesforce+servicenow+integration',
 ]
 
 function getArg(flag, fallback) {

@@ -4,9 +4,9 @@ import { getAllArticles } from '@/lib/blog'
 import { REQUEST_DEMO_URL } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: 'AI Brain Blog | SAP, ERP & Enterprise AI Insights',
+  title: 'QorSync AI Blog | Autonomous Enterprise Operations',
   description:
-    'Expert insights on SAP S/4HANA, enterprise architecture, AI-powered discovery, and digital transformation.',
+    'Insights on enterprise AI operations, agent orchestration, workflow governance, and cross-system automation.',
 }
 
 export default async function BlogPage() {
@@ -18,9 +18,12 @@ export default async function BlogPage() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <Link href="/landing" className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 to-blue-600 font-bold text-white">
-              AI
+              Q
             </div>
-            <span className="text-xl font-bold text-white">AI Brain</span>
+            <div>
+              <span className="text-xl font-bold text-white">QorSync AI</span>
+              <p className="text-[10px] uppercase tracking-widest text-slate-400">An Accel4 Product</p>
+            </div>
           </Link>
           <nav className="hidden items-center gap-8 md:flex">
             <Link href="/landing" className="text-slate-300 transition hover:text-white">
@@ -35,10 +38,10 @@ export default async function BlogPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-20 text-center">
         <h1 className="mb-6 text-5xl font-bold text-white">
-          AI Brain <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Blog</span>
+          QorSync AI <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Blog</span>
         </h1>
         <p className="mx-auto max-w-2xl text-xl text-slate-300">
-          Practical guidance on SAP discovery, migration strategy, enterprise architecture, and applied AI.
+          Practical guidance on autonomous enterprise operations, agent execution, governance, and integration strategy.
         </p>
       </section>
 

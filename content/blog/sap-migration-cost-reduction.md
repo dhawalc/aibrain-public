@@ -5,7 +5,7 @@ date: "2026-02-27"
 category: "SAP Migration"
 author: "AI Brain Team"
 readTime: "9 min read"
-published: true
+published: false
 ---
 
 # How to Reduce SAP S/4HANA Migration Costs by 60%

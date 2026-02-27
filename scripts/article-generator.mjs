@@ -3,6 +3,19 @@
 import { mkdir, writeFile } from 'fs/promises'
 import path from 'path'
 
+const ALLOWED_CATEGORIES = [
+  'Enterprise Architecture Discovery',
+  'Cross-System Integration Patterns',
+  'Agentic Automation & Orchestration',
+  'Governance, Risk & Compliance',
+  'Security & Platform Operations',
+  'ROI & Transformation Strategy',
+  'Implementation Playbooks',
+  'SAP Deep Dives',
+  'Oracle & NetSuite Playbooks',
+  'Salesforce & GTM Operations',
+]
+
 function getArg(flag, fallback = '') {
   const idx = process.argv.indexOf(flag)
   if (idx === -1 || !process.argv[idx + 1]) return fallback
@@ -18,11 +31,33 @@ function slugify(value) {
     .replace(/-+/g, '-')
 }
 
-async function generateWithOpenAI(topic) {
+function pickCategory(requested) {
+  if (ALLOWED_CATEGORIES.includes(requested)) return requested
+  return 'Agentic Automation & Orchestration'
+}
+
+async function generateWithOpenAI(topic, category) {
   const apiKey = process.env.OPENAI_API_KEY
   if (!apiKey) return null
 
-  const prompt = `Write a practical blog article for SAP/enterprise architects on this topic: ${topic}.\n\nRequirements:\n- 1,000-1,300 words\n- clear sections\n- actionable bullets\n- no fluff\n- markdown format\n- include a concise 150-char meta description line as: META_DESCRIPTION: ...\n`;
+  const prompt = `You are writing for QorSync AI (an Accel4 product), an enterprise AI operations platform.
+
+Topic: ${topic}
+Category: ${category}
+
+Write a practical blog article for enterprise operators, architects, and transformation leaders.
+
+Hard requirements:
+- 900-1300 words
+- markdown format only
+- clear section headers
+- concrete steps and checklists
+- realistic claims (no hype, no workforce-replacement language)
+- include human-in-the-loop governance guidance
+- include at least one cross-system example (ERP/CRM/ITSM/data)
+- include one short KPI table in markdown
+- include a concise SEO line in this exact format: META_DESCRIPTION: ...
+`
 
   const response = await fetch('https://api.openai.com/v1/responses', {
     method: 'POST',
@@ -33,7 +68,7 @@ async function generateWithOpenAI(topic) {
     body: JSON.stringify({
       model: process.env.OPENAI_MODEL || 'gpt-5-mini',
       input: prompt,
-      max_output_tokens: 2200,
+      max_output_tokens: 2500,
     }),
   })
 
@@ -47,22 +82,64 @@ async function generateWithOpenAI(topic) {
   if (!text) return null
 
   const metaMatch = text.match(/META_DESCRIPTION:\s*(.+)/i)
-  const description = (metaMatch?.[1] || `Analysis and strategy for ${topic}.`).trim()
+  const description = (metaMatch?.[1] || `A practical guide to ${topic} for enterprise teams.`).trim()
   const content = text.replace(/META_DESCRIPTION:\s*.+/i, '').trim()
   return { description, content }
 }
 
-function generateFallback(topic) {
+function generateFallback(topic, category) {
   return {
-    description: `A practical guide to ${topic} for SAP and enterprise architecture teams.`,
-    content: `# ${topic}\n\n## Why this matters\n\n${topic} affects delivery speed, risk, and architecture decisions across SAP programs.\n\n## Common failure patterns\n\n- Teams optimize tooling before agreeing on operating model\n- No baseline for current-state process/object landscape\n- Governance is added late, after integration debt accumulates\n\n## Recommended approach\n\n1. Establish current-state visibility first\n2. Define target-state constraints early (security, latency, ownership)\n3. Pilot in one domain and capture measurable outcomes\n4. Scale with standard patterns and review checkpoints\n\n## Implementation checklist\n\n- Confirm stakeholders and ownership boundaries\n- Inventory integration points and data contracts\n- Define KPIs and observability signals\n- Build migration waves with rollback plans\n\n## Final takeaways\n\nTeams that treat ${topic} as an architecture capability, not a one-time project task, reduce risk and ship faster.`,
+    description: `A practical ${category.toLowerCase()} guide for autonomous enterprise operations with QorSync AI.`,
+    content: `# ${topic}
+
+## Why this matters
+
+${topic} directly impacts execution speed, policy compliance, and operating cost across enterprise systems.
+
+## What teams usually get wrong
+
+- Automating tasks without clear ownership or risk thresholds
+- Running disconnected tools across ERP, CRM, ITSM, and data stacks
+- Missing approval design for high-impact actions
+- Measuring activity instead of measurable business outcomes
+
+## QorSync AI operating model
+
+1. **Discover reality**: map systems, process objects, and dependencies
+2. **Apply governance**: define risk tiers and approval checkpoints
+3. **Execute with agents**: automate repetitive and low-risk work
+4. **Improve continuously**: use audit logs and feedback to tune behavior
+
+## Human-in-the-loop design checklist
+
+- Define low, medium, and high-risk action classes
+- Require explicit approval for financial, customer-impact, and security-sensitive actions
+- Ensure every action is logged with context and actor lineage
+- Set escalation time targets for approval queues
+
+## KPI table
+
+| KPI | Before | After |\n| --- | --- | --- |\n| Cycle time | 5-10 days | 1-2 days |\n| Manual touch rate | 80%+ | <20% |\n| Escalation rate | High | Controlled with risk gating |
+
+## Implementation playbook (first 30 days)
+
+- Week 1: baseline systems and process-object inventory
+- Week 2: onboard integrations and define policy rules
+- Week 3: launch pilot automations with approval gates
+- Week 4: measure outcomes and expand to next workflow domain
+
+## Final takeaways
+
+Treat ${topic} as an operating capability, not a one-off project. Teams that combine autonomous execution with governance deliver speed without losing control.
+`,
   }
 }
 
 async function main() {
   const topic = getArg('--topic')
-  const category = getArg('--category', 'SAP Strategy')
-  const author = getArg('--author', 'AI Brain Team')
+  const requestedCategory = getArg('--category', 'Agentic Automation & Orchestration')
+  const category = pickCategory(requestedCategory)
+  const author = getArg('--author', 'QorSync AI Team')
   const forceSlug = getArg('--slug')
 
   if (!topic) {
@@ -73,7 +150,7 @@ async function main() {
   const outDir = path.join(process.cwd(), 'content', 'blog')
   const outPath = path.join(outDir, `${slug}.md`)
 
-  const generated = (await generateWithOpenAI(topic)) || generateFallback(topic)
+  const generated = (await generateWithOpenAI(topic, category)) || generateFallback(topic, category)
 
   const markdown = `---\ntitle: "${topic.replace(/"/g, '\\"')}"\ndescription: "${generated.description.replace(/"/g, '\\"')}"\ndate: "${new Date().toISOString().slice(0, 10)}"\ncategory: "${category.replace(/"/g, '\\"')}"\nauthor: "${author.replace(/"/g, '\\"')}"\nreadTime: "8 min read"\npublished: false\n---\n\n${generated.content}\n`
 

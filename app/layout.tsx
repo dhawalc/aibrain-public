@@ -16,10 +16,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'AI Brain Public',
-    template: '%s | AI Brain',
+    default: 'QorSync AI',
+    template: '%s | QorSync AI',
   },
-  description: 'AI Brain public landing and blog.',
+  description: 'QorSync AI public site and blog. An Accel4 product.',
 };
 
 export default function RootLayout({

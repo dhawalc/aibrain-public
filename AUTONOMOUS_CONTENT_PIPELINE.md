@@ -1,11 +1,11 @@
 # Autonomous Content Pipeline
 
-This repo includes a minimal autonomous content pipeline for SEO/blog growth.
+This repo includes a minimal autonomous content pipeline for QorSync AI SEO/blog growth.
 
 ## Scripts
 
 - `npm run trends:scan`
-  - Pulls SAP/ERP/enterprise-AI trending topics from Google News RSS.
+  - Pulls enterprise AI operations and cross-system automation topics from Google News RSS.
   - Writes `data/trends.json`.
 
 - `npm run article:generate -- --topic "Your Topic"`

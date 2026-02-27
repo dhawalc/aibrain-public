@@ -4,6 +4,16 @@ import { readFile } from 'fs/promises'
 import path from 'path'
 import { spawn } from 'child_process'
 
+const CATEGORY_ROTATION = [
+  'Enterprise Architecture Discovery',
+  'Cross-System Integration Patterns',
+  'Agentic Automation & Orchestration',
+  'Governance, Risk & Compliance',
+  'Security & Platform Operations',
+  'ROI & Transformation Strategy',
+  'Implementation Playbooks',
+]
+
 function getArg(flag, fallback = '') {
   const idx = process.argv.indexOf(flag)
   if (idx === -1 || !process.argv[idx + 1]) return fallback
@@ -31,9 +41,12 @@ async function main() {
     throw new Error('No topics in data/trends.json. Run trend-finder first.')
   }
 
-  for (const entry of topics) {
-    const topic = entry.topic || 'SAP Transformation Strategy'
-    await run('node', ['scripts/article-generator.mjs', '--topic', topic, '--category', 'SAP Insights'])
+  for (let idx = 0; idx < topics.length; idx += 1) {
+    const entry = topics[idx]
+    const topic = entry.topic || 'Autonomous enterprise operations strategy'
+    const category = CATEGORY_ROTATION[idx % CATEGORY_ROTATION.length]
+
+    await run('node', ['scripts/article-generator.mjs', '--topic', topic, '--category', category])
   }
 }
 

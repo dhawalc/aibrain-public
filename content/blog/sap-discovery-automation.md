@@ -5,7 +5,7 @@ date: "2026-02-27"
 category: "SAP Discovery"
 author: "AI Brain Team"
 readTime: "8 min read"
-published: true
+published: false
 ---
 
 # How AI is Transforming SAP Discovery: From Weeks to Hours

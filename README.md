@@ -1,10 +1,10 @@
-# AI Brain Public
+# QorSync AI Public
 
-Public-facing landing and blog service for AI Brain.
+Public-facing landing and blog service for QorSync AI, an Accel4 product.
 
 ## Scope
 
-This service is intentionally public and independent from the private AI Brain application.
+This service is intentionally public and independent from the private QorSync AI application.
 
 - Public routes:
   - `/landing`
