@@ -44,6 +44,10 @@ Owner: QorSync AI (Accel4)
 5. Keep publishing file-based in this repo (no CMS integration in MVP).
 6. Analytics MVP scope: GA4 + GSC only (rank tracker later if needed).
 7. Add manual LinkedIn distribution assist on each article via copy button.
+8. Keyword strategy weighting locked to:
+   - 60% AI/agents/autonomous operations
+   - 25% governance/reliability/compliance
+   - 15% system-specific integrations
 
 ## Open Questions (Need User Input)
 1. Share GA4 and GSC credentials/service-account details when ready.
@@ -64,3 +68,4 @@ Owner: QorSync AI (Accel4)
 - Added Search Console URL-prefix property for public URL (pending verification).
 - Generated 100 keyword-driven articles via bulk pipeline with publish=true.
 - Added author branding pass: Dhawal Chheda bylines, author page, and article schema updates.
+- Updated keyword planner to enforce AI-first weighting and validated 500-topic output (300/125/75 split).
