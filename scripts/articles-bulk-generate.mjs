@@ -22,15 +22,16 @@ function run(command, args) {
 
 async function main() {
   const count = Number(getArg('--count', '100'))
+  const offset = Number(getArg('--offset', '0'))
   const publish = getArg('--publish', 'true')
 
   const planPath = path.join(process.cwd(), 'data', 'keywords-plan.json')
   const raw = await readFile(planPath, 'utf-8')
   const plan = JSON.parse(raw)
-  const items = (plan.items || []).slice(0, count)
+  const items = (plan.items || []).slice(offset, offset + count)
 
   if (items.length === 0) {
-    throw new Error('No topics in data/keywords-plan.json. Run keywords:plan first.')
+    throw new Error('No topics in requested range from data/keywords-plan.json. Run keywords:plan first or adjust --offset.')
   }
 
   for (const item of items) {
@@ -47,7 +48,7 @@ async function main() {
     ])
   }
 
-  console.log(`Generated ${items.length} articles (publish=${publish}).`)
+  console.log(`Generated ${items.length} articles (publish=${publish}, offset=${offset}).`)
 }
 
 main().catch((error) => {
