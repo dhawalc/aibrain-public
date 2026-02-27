@@ -59,6 +59,11 @@ Only `published: true` posts are rendered.
 
 See [AUTONOMOUS_CONTENT_PIPELINE.md](./AUTONOMOUS_CONTENT_PIPELINE.md).
 
+Execution planning and active status:
+- [docs/AUTONOMOUS_CONTENT_ENGINE_MASTER_PLAN.md](./docs/AUTONOMOUS_CONTENT_ENGINE_MASTER_PLAN.md)
+- [docs/AUTONOMOUS_CONTENT_ENGINE_TASKBOARD.md](./docs/AUTONOMOUS_CONTENT_ENGINE_TASKBOARD.md)
+- [docs/SESSION_BOOTSTRAP_PROTOCOL.md](./docs/SESSION_BOOTSTRAP_PROTOCOL.md)
+
 Quick commands:
 
 ```bash
