@@ -71,6 +71,8 @@ Quick commands:
 npm run trends:scan
 npm run pipeline:run
 npm run article:generate -- --topic "Human-in-the-loop approval architecture"
+npm run analytics:discover
+npm run metrics:ingest -- --days 7
 ```
 
 Generated articles default to `published: false`.

@@ -9,7 +9,9 @@
     "lint": "eslint",
     "trends:scan": "node scripts/trend-finder.mjs",
     "article:generate": "node scripts/article-generator.mjs",
-    "pipeline:run": "node scripts/content-pipeline.mjs"
+    "pipeline:run": "node scripts/content-pipeline.mjs",
+    "analytics:discover": "node scripts/analytics-discover.mjs",
+    "metrics:ingest": "node scripts/metrics-ingest.mjs"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

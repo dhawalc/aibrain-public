@@ -26,7 +26,7 @@ Owner: QorSync AI (Accel4)
 | ACE-008 | Build docs ingestion pipeline for RAG | TODO | P0 | ACE-007 | Product docs indexed and retrievable by chunk |
 | ACE-009 | Enforce citation-required drafting | TODO | P0 | ACE-008 | Draft fails if citation coverage below threshold |
 | ACE-010 | Fact-check gate with fail/approve states | TODO | P0 | ACE-009 | Fact-check output attached to approval packet |
-| ACE-011 | Integrate GA4 and GSC weekly ingestion | TODO | P1 | ACE-007 | Metrics captured to `article_metrics` table |
+| ACE-011 | Integrate GA4 and GSC weekly ingestion | IN_PROGRESS | P1 | ACE-007 | Metrics captured to `article_metrics` table |
 | ACE-012 | Build refresh-task generator | TODO | P1 | ACE-011 | Decaying pages auto-create refresh tasks |
 | ACE-013 | Topic scoring model v1 | TODO | P1 | ACE-011 | New topics ranked by expected impact |
 | ACE-014 | Optional CrewAI/LangGraph runtime migration | TODO | P2 | ACE-004..013 | Python runtime parity with same contracts |
@@ -57,3 +57,5 @@ Owner: QorSync AI (Accel4)
 - Added this taskboard and master planning docs.
 - Locked MVP stack choices for low-cost implementation.
 - Added manual LinkedIn copy-post button requirement to execution scope.
+- Added analytics discovery and metrics ingestion scripts using Google ADC.
+- Captured currently visible GA4/GSC assets and documented setup path.
