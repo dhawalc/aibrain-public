@@ -1,11 +1,13 @@
 ---
-title: "Autonomous operations with human approval: Best Practices"
-description: "A practical agentic automation & orchestration guide for autonomous enterprise operations with QorSync AI."
-date: "2026-02-27"
-category: "Agentic Automation & Orchestration"
-author: "Dhawal Chheda, AI Leader at Accel4"
-readTime: "8 min read"
-published: true
+title: 'Autonomous operations with human approval: Best Practices'
+description: >-
+  A practical agentic automation & orchestration guide for autonomous enterprise
+  operations with QorSync AI.
+date: '2026-02-27'
+category: Agentic Automation & Orchestration
+author: 'Dhawal Chheda, AI Leader at Accel4'
+readTime: 8 min read
+published: false
 ---
 
 # Autonomous operations with human approval: Best Practices

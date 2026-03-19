@@ -1,11 +1,13 @@
 ---
-title: "Agent failure recovery strategy: Product + Engineering Guide"
-description: "A practical agentic automation & orchestration guide for autonomous enterprise operations with QorSync AI."
-date: "2026-02-27"
-category: "Agentic Automation & Orchestration"
-author: "Dhawal Chheda, AI Leader at Accel4"
-readTime: "8 min read"
-published: true
+title: 'Agent failure recovery strategy: Product + Engineering Guide'
+description: >-
+  A practical agentic automation & orchestration guide for autonomous enterprise
+  operations with QorSync AI.
+date: '2026-02-27'
+category: Agentic Automation & Orchestration
+author: 'Dhawal Chheda, AI Leader at Accel4'
+readTime: 8 min read
+published: false
 ---
 
 # Agent failure recovery strategy: Product + Engineering Guide

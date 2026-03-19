@@ -7,11 +7,20 @@ export const metadata: Metadata = {
   description: 'Articles and operating notes by Dhawal Chheda, AI Leader at Accel4.',
 }
 
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Dhawal Chheda',
+  jobTitle: 'AI Leader at Accel4',
+  url: 'https://qorsync.online/author/dhawal-chheda',
+}
+
 export default async function AuthorPage() {
   const posts = await getAllArticles()
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
       <main className="mx-auto max-w-5xl px-6 py-16">
         <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-8">
           <p className="text-sm uppercase tracking-widest text-[#26AAE3]">Author</p>

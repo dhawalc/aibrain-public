@@ -5,10 +5,18 @@ import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeSanitize from 'rehype-sanitize'
 import remarkGfm from 'remark-gfm'
+import DemoCta from '@/components/demo-cta'
 import LinkedInCopyButton from '@/components/linkedin-copy-button'
+import NewsletterCta from '@/components/newsletter-cta'
+import SecondaryCta from '@/components/secondary-cta'
 import { AUTHOR_NAME, AUTHOR_PATH, AUTHOR_TITLE } from '@/lib/brand'
 import { getAllArticles, getArticleBySlug, getRelatedArticles } from '@/lib/blog'
-import { REQUEST_DEMO_URL, SITE_URL } from '@/lib/site'
+import { SITE_URL } from '@/lib/site'
+
+/** Strip the first `# Heading` line from markdown to avoid duplicate H1 with the template heading */
+function stripFirstH1(markdown: string): string {
+  return markdown.replace(/^#\s+.+\n*/, '')
+}
 
 type Params = Promise<{ slug: string }>
 
@@ -67,13 +75,23 @@ export default async function BlogPostPage({ params }: { params: Params }) {
     },
     mainEntityOfPage: articleUrl,
   }
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://qorsync.online' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://qorsync.online/blog' },
+      { '@type': 'ListItem', position: 3, name: post.title },
+    ],
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <header className="border-b border-slate-800 bg-slate-950/50 backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <Link href="/landing" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-[#093E8F] to-[#1C74BC] font-bold text-white">
               Q
             </div>
@@ -86,9 +104,12 @@ export default async function BlogPostPage({ params }: { params: Params }) {
             <Link href="/blog" className="text-slate-300 transition hover:text-white">
               Blog
             </Link>
-            <a href={REQUEST_DEMO_URL} className="rounded-lg bg-[#093E8F] px-4 py-2 font-medium text-white transition hover:bg-[#0A3F8F]">
+            <Link href="/tools" className="text-slate-300 transition hover:text-white">
+              Tools
+            </Link>
+            <DemoCta source="article_header" className="rounded-lg bg-[#093E8F] px-4 py-2 font-medium text-white transition hover:bg-[#0A3F8F]">
               Request Demo
-            </a>
+            </DemoCta>
           </nav>
         </div>
       </header>
@@ -154,19 +175,25 @@ export default async function BlogPostPage({ params }: { params: Params }) {
               ),
             }}
           >
-            {post.content}
+            {stripFirstH1(post.content)}
           </ReactMarkdown>
         </div>
+
+        <NewsletterCta source={`article_newsletter_${slug}`} articleTitle={post.title} />
 
         <div className="mt-16 rounded-2xl border border-[#26AAE3]/30 bg-gradient-to-r from-cyan-600/10 to-blue-600/10 p-8">
           <h3 className="mb-3 text-2xl font-bold text-white">Ready to Run Autonomous Enterprise Operations?</h3>
           <p className="mb-6 text-slate-300">See how QorSync AI deploys governed agents across your enterprise systems.</p>
-          <a
-            href={REQUEST_DEMO_URL}
+          <DemoCta
+            source={`article_bottom_${slug}`}
             className="inline-flex items-center rounded-lg bg-gradient-to-r from-[#093E8F] to-[#1C74BC] px-6 py-3 font-semibold text-white transition hover:from-[#0A3F8F] hover:to-[#1C74BC]"
           >
             Request Demo
-          </a>
+          </DemoCta>
+          <div className="mt-6 border-t border-slate-700 pt-6">
+            <p className="mb-4 text-sm text-slate-400">Not ready for a demo? Start here instead:</p>
+            <SecondaryCta source={slug} />
+          </div>
         </div>
 
         {related.length > 0 ? (

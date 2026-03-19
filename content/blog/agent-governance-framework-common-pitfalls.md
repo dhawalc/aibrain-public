@@ -1,11 +1,13 @@
 ---
-title: "Agent governance framework: Common Pitfalls"
-description: "A practical governance, risk & compliance guide for autonomous enterprise operations with QorSync AI."
-date: "2026-02-27"
-category: "Governance, Risk & Compliance"
-author: "Dhawal Chheda, AI Leader at Accel4"
-readTime: "8 min read"
-published: true
+title: 'Agent governance framework: Common Pitfalls'
+description: >-
+  A practical governance, risk & compliance guide for autonomous enterprise
+  operations with QorSync AI.
+date: '2026-02-27'
+category: 'Governance, Risk & Compliance'
+author: 'Dhawal Chheda, AI Leader at Accel4'
+readTime: 8 min read
+published: false
 ---
 
 # Agent governance framework: Common Pitfalls

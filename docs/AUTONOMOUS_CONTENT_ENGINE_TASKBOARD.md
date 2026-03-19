@@ -19,16 +19,16 @@ Owner: QorSync AI (Accel4)
 | ACE-001 | Public site split and deployment | DONE | P0 | - | Public `/landing` + `/blog` live and stable |
 | ACE-002 | Rebrand content to QorSync AI + Accel4 attribution | DONE | P0 | ACE-001 | Brand and messaging updated in landing/blog |
 | ACE-003 | Request Demo CTA to direct email | DONE | P0 | ACE-002 | CTA opens `mailto:dhawal.chheda@accel4.com` |
-| ACE-004 | Convert pipeline to agent contract format | TODO | P0 | ACE-001 | Each stage has structured input/output schema |
-| ACE-005 | Add per-stage quality scoring | TODO | P0 | ACE-004 | Brand/fact/SEO/readability scores stored per run |
-| ACE-006 | Create approval packet generator | TODO | P0 | ACE-005 | One markdown/json packet per candidate article |
-| ACE-007 | Add run history persistence (DB) | TODO | P0 | ACE-004 | Runs and stage outputs saved in Postgres |
-| ACE-008 | Build docs ingestion pipeline for RAG | TODO | P0 | ACE-007 | Product docs indexed and retrievable by chunk |
-| ACE-009 | Enforce citation-required drafting | TODO | P0 | ACE-008 | Draft fails if citation coverage below threshold |
-| ACE-010 | Fact-check gate with fail/approve states | TODO | P0 | ACE-009 | Fact-check output attached to approval packet |
-| ACE-011 | Integrate GA4 and GSC weekly ingestion | IN_PROGRESS | P1 | ACE-007 | Metrics captured to `article_metrics` table |
-| ACE-012 | Build refresh-task generator | TODO | P1 | ACE-011 | Decaying pages auto-create refresh tasks |
-| ACE-013 | Topic scoring model v1 | TODO | P1 | ACE-011 | New topics ranked by expected impact |
+| ACE-004 | Convert pipeline to agent contract format | DONE | P0 | ACE-001 | Each stage has structured input/output schema |
+| ACE-005 | Add per-stage quality scoring | DONE | P0 | ACE-004 | Brand/fact/SEO/readability scores stored per run |
+| ACE-006 | Create approval packet generator | DONE | P0 | ACE-005 | One markdown/json packet per candidate article |
+| ACE-007 | Add run history persistence (DB) | DONE | P0 | ACE-004 | Runs and stage outputs saved in Postgres |
+| ACE-008 | Build docs ingestion pipeline for RAG | DONE | P0 | ACE-007 | Product docs indexed and retrievable by chunk |
+| ACE-009 | Enforce citation-required drafting | DONE | P0 | ACE-008 | Draft fails if citation coverage below threshold |
+| ACE-010 | Fact-check gate with fail/approve states | DONE | P0 | ACE-009 | Fact-check output attached to approval packet |
+| ACE-011 | Integrate GA4 and GSC weekly ingestion | DONE | P1 | ACE-007 | Metrics captured to `article_metrics` table |
+| ACE-012 | Build refresh-task generator | DONE | P1 | ACE-011 | Decaying pages auto-create refresh tasks |
+| ACE-013 | Topic scoring model v1 | DONE | P1 | ACE-011 | New topics ranked by expected impact |
 | ACE-014 | Optional CrewAI/LangGraph runtime migration | TODO | P2 | ACE-004..013 | Python runtime parity with same contracts |
 
 ## Implementation Notes (Already Done)
@@ -69,3 +69,13 @@ Owner: QorSync AI (Accel4)
 - Generated 100 keyword-driven articles via bulk pipeline with publish=true.
 - Added author branding pass: Dhawal Chheda bylines, author page, and article schema updates.
 - Updated keyword planner to enforce AI-first weighting and validated 500-topic output (300/125/75 split).
+
+### 2026-03-04
+- Implemented agent contract runtime in `scripts/agents/*` with required stage envelope validation.
+- Added quality scoring + publish gates (citation/fact/SEO/brand/readability + overall score).
+- Added automated approval packet generation (`data/approvals/<run_id>/approval.{json,md}`).
+- Added run history persistence to file + optional Postgres tables (`content_runs`, `content_stage_outputs`).
+- Added docs ingestion and retrievable chunk store for citation grounding (`knowledge_chunks` + `data/knowledge/chunks.json`).
+- Enforced citation-required drafting and fact-check fail/pass logic before publish eligibility.
+- Integrated GA4/GSC ingestion with optional write to `article_metrics` in Postgres.
+- Added refresh queue builder and topic priority scoring model scripts.

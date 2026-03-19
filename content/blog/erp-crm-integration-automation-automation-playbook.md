@@ -1,11 +1,13 @@
 ---
-title: "Erp crm integration automation: Automation Playbook"
-description: "A practical cross-system integration patterns guide for autonomous enterprise operations with QorSync AI."
-date: "2026-02-27"
-category: "Cross-System Integration Patterns"
-author: "Dhawal Chheda, AI Leader at Accel4"
-readTime: "8 min read"
-published: true
+title: 'Erp crm integration automation: Automation Playbook'
+description: >-
+  A practical cross-system integration patterns guide for autonomous enterprise
+  operations with QorSync AI.
+date: '2026-02-27'
+category: Cross-System Integration Patterns
+author: 'Dhawal Chheda, AI Leader at Accel4'
+readTime: 8 min read
+published: false
 ---
 
 # Erp crm integration automation: Automation Playbook

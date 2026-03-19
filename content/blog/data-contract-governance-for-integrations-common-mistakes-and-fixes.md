@@ -1,11 +1,13 @@
 ---
-title: "Data contract governance for integrations: Common Mistakes and Fixes"
-description: "A practical cross-system integration patterns guide for autonomous enterprise operations with QorSync AI."
-date: "2026-02-27"
-category: "Cross-System Integration Patterns"
-author: "Dhawal Chheda, AI Leader at Accel4"
-readTime: "8 min read"
-published: true
+title: 'Data contract governance for integrations: Common Mistakes and Fixes'
+description: >-
+  A practical cross-system integration patterns guide for autonomous enterprise
+  operations with QorSync AI.
+date: '2026-02-27'
+category: Cross-System Integration Patterns
+author: 'Dhawal Chheda, AI Leader at Accel4'
+readTime: 8 min read
+published: false
 ---
 
 # Data contract governance for integrations: Common Mistakes and Fixes

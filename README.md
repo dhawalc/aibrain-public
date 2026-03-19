@@ -28,6 +28,7 @@ Create `.env.local`:
 
 ```bash
 NEXT_PUBLIC_DEMO_EMAIL=dhawal.chheda@accel4.com
+NEXT_PUBLIC_DEMO_URL=
 NEXT_PUBLIC_SITE_URL=https://<your-public-service-url>
 OPENAI_API_KEY=<optional>
 OPENAI_MODEL=gpt-5-mini
@@ -35,6 +36,9 @@ GA4_PROPERTY_ID=
 GSC_SITE_URL=
 GCP_QUOTA_PROJECT=aibrain-ceo-live-20260218
 NEXT_PUBLIC_GA_MEASUREMENT_ID=
+SITEMAP_MAX_POSTS=120
+DATABASE_URL=
+PGSSL=true
 ```
 
 ## Content model
@@ -59,6 +63,9 @@ Only `published: true` posts are rendered.
 
 - `app/sitemap.ts` emits landing/blog/post URLs
 - `app/robots.ts` publishes robots policy and sitemap
+- `app/llms.txt/route.ts` exposes high-value pages for LLM crawlers
+- `app/rss.xml/route.ts` provides RSS feed for distribution/indexing
+- Blog index and sitemap prioritize non-templated posts to reduce low-value index bloat
 
 ## Autonomous content pipeline
 
@@ -73,15 +80,20 @@ Quick commands:
 
 ```bash
 npm run trends:scan
+npm run agents:ingest
+npm run agents:run -- --count 3
 npm run pipeline:run
+npm run pipeline:run:auto
 npm run article:generate -- --topic "Human-in-the-loop approval architecture"
 npm run keywords:plan -- --count 100
 npm run articles:bulk -- --count 100 --publish true
 npm run analytics:discover
 npm run metrics:ingest -- --days 7
+npm run agents:topic-score
+npm run agents:refresh-queue
 ```
 
-Generated articles default to `published: false`.
+`pipeline:run` keeps human approval in loop and generates approval packets under `data/approvals/<run_id>/`.
 
 ## Deploy to Cloud Run
 

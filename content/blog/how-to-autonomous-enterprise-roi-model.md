@@ -1,11 +1,13 @@
 ---
-title: "How to Autonomous enterprise roi model"
-description: "A practical roi & transformation strategy guide for autonomous enterprise operations with QorSync AI."
-date: "2026-02-27"
-category: "ROI & Transformation Strategy"
-author: "Dhawal Chheda, AI Leader at Accel4"
-readTime: "8 min read"
-published: true
+title: How to Autonomous enterprise roi model
+description: >-
+  A practical roi & transformation strategy guide for autonomous enterprise
+  operations with QorSync AI.
+date: '2026-02-27'
+category: ROI & Transformation Strategy
+author: 'Dhawal Chheda, AI Leader at Accel4'
+readTime: 8 min read
+published: false
 ---
 
 # How to Autonomous enterprise roi model

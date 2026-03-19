@@ -3,6 +3,19 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SITE_URL } from '@/lib/site'
 
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'QorSync AI',
+  url: 'https://qorsync.online',
+  description: 'Autonomous enterprise operations platform',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Accel4',
+    brand: { '@type': 'Brand', name: 'QorSync AI' },
+  },
+}
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -32,6 +45,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
         {gaMeasurementId ? (
           <>
             <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}></script>

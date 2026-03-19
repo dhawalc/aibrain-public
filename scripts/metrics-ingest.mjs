@@ -3,6 +3,8 @@
 import { execSync } from 'child_process'
 import { mkdir, readFile, writeFile } from 'fs/promises'
 import path from 'path'
+import { randomUUID } from 'crypto'
+import { initSchema, closeDb, persistMetrics } from './agents/db.mjs'
 
 const USER_PROJECT = process.env.GCP_QUOTA_PROJECT || 'aibrain-ceo-live-20260218'
 const GA4_PROPERTY_ID = process.env.GA4_PROPERTY_ID || ''
@@ -110,6 +112,18 @@ async function ingestGSC(startDate, endDate) {
   }
 }
 
+async function safeIngest(label, fn) {
+  try {
+    return await fn()
+  } catch (error) {
+    return {
+      enabled: false,
+      reason: error instanceof Error ? error.message : `${label} ingestion failed`,
+      rows: [],
+    }
+  }
+}
+
 function summarize(ga4, gsc) {
   const gaSessions = ga4.rows.reduce((sum, row) => sum + row.sessions, 0)
   const gaViews = ga4.rows.reduce((sum, row) => sum + row.views, 0)
@@ -150,7 +164,10 @@ async function main() {
   const startDate = toDateString(start)
   const endDate = toDateString(end)
 
-  const [ga4, gsc] = await Promise.all([ingestGA4(startDate, endDate), ingestGSC(startDate, endDate)])
+  const [ga4, gsc] = await Promise.all([
+    safeIngest('ga4', () => ingestGA4(startDate, endDate)),
+    safeIngest('gsc', () => ingestGSC(startDate, endDate)),
+  ])
   const summary = summarize(ga4, gsc)
 
   const payload = {
@@ -166,6 +183,32 @@ async function main() {
   const outPath = path.join(outDir, `${endDate}.json`)
   await writeFile(outPath, JSON.stringify(payload, null, 2), 'utf-8')
   await ensureEnvTemplateHasAnalyticsVars()
+
+  const conn = await initSchema()
+  const metricRows = [
+    ...ga4.rows.map((row) => ({
+      id: randomUUID(),
+      slug: (row.pagePath || '').replace(/^\/blog\//, ''),
+      page_path: row.pagePath || '',
+      sessions: row.sessions || 0,
+      views: row.views || 0,
+      source: 'ga4',
+      payload: row,
+    })),
+    ...gsc.rows.map((row) => ({
+      id: randomUUID(),
+      slug: (row.page || '').split('/blog/')[1]?.replace(/\/$/, '') || '',
+      page_path: row.page || '',
+      clicks: row.clicks || 0,
+      impressions: row.impressions || 0,
+      ctr: row.ctr || 0,
+      position: row.position || 0,
+      source: 'gsc',
+      payload: row,
+    })),
+  ]
+  await persistMetrics(conn, metricRows)
+  await closeDb(conn)
 
   console.log(`Saved metrics snapshot to ${outPath}`)
   console.log(`Summary: sessions=${summary.ga4TotalSessions}, views=${summary.ga4TotalViews}, clicks=${summary.gscTotalClicks}, impressions=${summary.gscTotalImpressions}`)

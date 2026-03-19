@@ -1,11 +1,13 @@
 ---
-title: "Kpi framework for enterprise ai execution: Implementation Blueprint"
-description: "A practical roi & transformation strategy guide for autonomous enterprise operations with QorSync AI."
-date: "2026-02-27"
-category: "ROI & Transformation Strategy"
-author: "Dhawal Chheda, AI Leader at Accel4"
-readTime: "8 min read"
-published: true
+title: 'Kpi framework for enterprise ai execution: Implementation Blueprint'
+description: >-
+  A practical roi & transformation strategy guide for autonomous enterprise
+  operations with QorSync AI.
+date: '2026-02-27'
+category: ROI & Transformation Strategy
+author: 'Dhawal Chheda, AI Leader at Accel4'
+readTime: 8 min read
+published: false
 ---
 
 # Kpi framework for enterprise ai execution: Implementation Blueprint

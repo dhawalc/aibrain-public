@@ -7,6 +7,12 @@ export const metadata: Metadata = {
   title: 'QorSync AI Blog | Autonomous Enterprise Operations',
   description:
     'Insights on enterprise AI operations, agent orchestration, workflow governance, and cross-system automation.',
+  twitter: {
+    card: 'summary_large_image',
+    title: 'QorSync AI Blog | Autonomous Enterprise Operations',
+    description:
+      'Insights on enterprise AI operations, agent orchestration, workflow governance, and cross-system automation.',
+  },
 }
 
 export default async function BlogPage() {
@@ -16,7 +22,7 @@ export default async function BlogPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900">
       <header className="border-b border-slate-800 bg-slate-950/50 backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <Link href="/landing" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-[#093E8F] to-[#1C74BC] font-bold text-white">
               Q
             </div>
@@ -26,7 +32,7 @@ export default async function BlogPage() {
             </div>
           </Link>
           <nav className="hidden items-center gap-8 md:flex">
-            <Link href="/landing" className="text-slate-300 transition hover:text-white">
+            <Link href="/" className="text-slate-300 transition hover:text-white">
               Home
             </Link>
             <a href={REQUEST_DEMO_URL} className="rounded-lg bg-[#093E8F] px-4 py-2 font-medium text-white transition hover:bg-[#0A3F8F]">
