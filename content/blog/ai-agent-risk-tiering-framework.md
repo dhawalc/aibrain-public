@@ -8,164 +8,117 @@ readTime: "10 min read"
 published: true
 ---
 
-## The "AI Is Risky" Problem
+## Why Most Agent Governance Fails Before It Ships
 
-Ask most enterprise teams about AI agent risk and you get one of two responses: "AI is too risky for production" or "we have guardrails." Neither is useful.
+Every enterprise AI team hits the same wall. Someone asks: "What can this agent do on its own?" And the answer is either "everything" or "nothing." Both are wrong.
 
-The first response blocks adoption entirely. The second is usually a confidence threshold bolted onto a prompt, which does nothing when the real risk is an agent executing a $50K refund instead of a $50 one.
+We run 385+ agents in production across SAP, NetSuite, Oracle, Salesforce, and ServiceNow. Early on, we tried the binary approach: agents either needed approval for every action or ran fully autonomous. The first option created approval queues so deep that the agents were slower than the humans they replaced. The second generated incidents that eroded trust with the exact stakeholders we needed as champions.
 
-The fundamental mistake is treating AI risk as a binary property of the technology. It is not. Risk lives at the action level. An agent reading a ServiceNow ticket and an agent modifying a customer contract in Salesforce are different risk events even if they use the same model, the same prompt architecture, and the same orchestration framework.
+The breakthrough was simple in hindsight: risk is not a property of the agent. It is a property of each individual action the agent takes. An agent reading a ServiceNow ticket and the same agent posting a journal entry in SAP are fundamentally different risk events. They need different controls, different audit trails, and different escalation paths.
 
-You need action-level risk classification. Without it, you either over-govern (everything requires approval, nothing ships) or under-govern (everything auto-executes, incidents happen). Both outcomes kill agent programs.
+That insight drove us to build a scoring-based risk tiering system. Here is exactly how it works.
 
-## Five Risk Dimensions
+## How We Score Risk in Production
 
-Every agent action should be scored across five dimensions. These are not arbitrary. They map directly to what compliance, legal, and operations teams actually care about when an agent does something wrong.
+After testing dozens of scoring models, we settled on four dimensions that capture what compliance, finance, and operations teams actually need to evaluate. Not five, not ten. Four scored dimensions that our customers can tune per tenant without calling us.
 
-**1. Financial Exposure.** What is the maximum monetary impact if this action executes incorrectly? A read-only query has zero financial exposure. Submitting a payment in SAP has exposure equal to the payment amount. This is the most intuitive dimension, and usually the first one teams get right.
+**Financial Exposure (1-5).** What is the maximum monetary impact if this action executes incorrectly? Reading inventory levels in SAP scores a 1. Submitting a payment batch scores a 5. This dimension is the one every stakeholder intuitively understands, so it anchors the conversation.
 
-**2. Customer Impact.** Does this action affect an external customer, partner, or vendor? Internal-only actions (updating an internal wiki, routing a ticket between teams) carry lower risk than actions that touch customer records, send external communications, or modify service agreements.
+**System Impact (1-5).** How broadly does this action affect connected systems and data? An action scoped to a single record in one system scores low. An action that triggers downstream workflows across SAP's 34,000+ managed objects or cascades into Salesforce deal records scores high. System impact captures blast radius, which financial exposure alone misses.
 
-**3. Security Scope.** What data and systems does this action access? An agent querying a read-only reporting API is different from an agent that writes to a production database or modifies IAM permissions. Score based on the sensitivity of the data touched and the privilege level required.
+**Reversibility (1-5).** Can this action be undone, and at what cost? Creating a draft purchase requisition is fully reversible, a 1. Sending an external customer email is irreversible, a 5. Posting a journal entry is technically reversible with a correcting entry, but the audit implications push it to a 4. Reversibility is the dimension that separates recoverable mistakes from incident responses.
 
-**4. Reversibility.** Can this action be undone, and at what cost? Creating a draft document is fully reversible. Sending an email to 10,000 customers is not. Reversibility is the dimension that separates "we can fix this" from "we need an incident response."
+**Regulatory Scope (1-5).** Does this action touch data or processes governed by specific regulations? Internal-only actions with no PII score a 1. Actions involving SOX-controlled financial records, GDPR-covered personal data, or regulated health information score 4 or 5. This dimension exists because regulatory violations have consequences that scale independently of the action's other properties.
 
-**5. Regulatory Implication.** Does this action touch data or processes governed by specific regulations? Actions involving PII under GDPR, financial records under SOX, or health data under HIPAA carry inherent regulatory risk regardless of the other dimensions.
+Each action gets a composite score from 4 (minimum) to 20 (maximum). No weighting. We tried weighted models early on and found they created false precision that made the tiers harder to explain to governance committees. The raw sum works better because every stakeholder can look at the four numbers and understand exactly why an action landed in a given tier.
 
-## Risk Scoring Model
+## The Three Tiers and What They Actually Do
 
-Score each dimension 1-5 for every agent action. Apply weights based on your organization's priorities. Here is a starting-point weighting that works for most enterprise environments:
+The composite score maps to three tiers. Each tier prescribes a specific control pattern, logging behavior, and SLA.
 
-| Dimension | Weight | Score Range | Weighted Score Range |
-| --- | --- | --- | --- |
-| Financial exposure | 1.5x | 1-5 | 1.5 - 7.5 |
-| Customer impact | 1.3x | 1-5 | 1.3 - 6.5 |
-| Security scope | 1.2x | 1-5 | 1.2 - 6.0 |
-| Reversibility | 1.0x | 1-5 | 1.0 - 5.0 |
-| Regulatory implication | 1.5x | 1-5 | 1.5 - 7.5 |
+| Tier | Score Range | Execution Model | Logging | SLA |
+| --- | --- | --- | --- | --- |
+| **Tier 1 (Low)** | 4-8 | Auto-execute, no approval needed | Async logging | None |
+| **Tier 2 (Medium)** | 9-14 | Auto-execute with mandatory post-review | Sync logging, review within 4 hours | 4h review window |
+| **Tier 3 (High)** | 15-20 | Blocked until pre-approval | Full audit trail, complete decision trace | 2h approval SLA, 4h escalation |
 
-**Total weighted score range: 6.5 - 32.5**
+These are not suggestions. Every action that scores 15 or above is physically blocked from executing until a named approver signs off. Every action in Tier 2 executes immediately but enters a review queue with a 4-hour window. If the reviewer identifies an issue, rollback triggers automatically where the target system supports it.
 
-Map to tiers:
+The SLA structure on Tier 3 matters more than people expect. A 2-hour approval SLA with a 4-hour escalation means high-risk actions do not sit in someone's inbox for days. If the designated approver does not act within 2 hours, the request escalates. This prevents governance from becoming a bottleneck while maintaining the control.
 
-- **Tier 1 — Low Risk (6.5-13):** Auto-execute with logging
-- **Tier 2 — Medium Risk (13.1-22):** Execute with controls
-- **Tier 3 — High Risk (22.1-32.5):** Require human approval
+## Concrete Scoring: 3-Way Invoice Matching
 
-Financial exposure and regulatory implication carry the highest weights because these are the dimensions where errors have the longest-lasting consequences and the hardest remediation paths.
+Abstract frameworks are useless without concrete examples. Here is how risk tiering works on one of the most common enterprise processes: 3-way invoice matching across purchase order, goods receipt, and vendor invoice.
 
-## Action-to-Tier Mapping: 18 Enterprise Examples
+**Step 1: Read PO details from SAP.** Financial Exposure: 1 (read-only). System Impact: 1 (single system query). Reversibility: 1 (no state change). Regulatory Scope: 1 (no regulated data). **Total: 4. Tier 1.** Auto-executes instantly.
 
-This is where theory becomes practice. Here is how common enterprise agent actions map across ERP, CRM, and ITSM systems:
+**Step 2: Match invoice line items to PO and receipt.** Financial Exposure: 2 (matching errors could delay payment). System Impact: 2 (touches PO and receipt records). Reversibility: 2 (match results can be recalculated). Regulatory Scope: 2 (financial records, but no posting yet). **Total: 8. Tier 1.** Still auto-executes, but the score is right at the boundary.
 
-| # | System | Agent Action | Fin. | Cust. | Sec. | Rev. | Reg. | Weighted Score | Tier |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | ServiceNow | Read ticket details | 1 | 1 | 1 | 1 | 1 | 6.5 | 1 |
-| 2 | Salesforce | Update lead status | 1 | 2 | 1 | 1 | 1 | 8.1 | 1 |
-| 3 | SAP | Query inventory levels | 1 | 1 | 2 | 1 | 1 | 7.9 | 1 |
-| 4 | Oracle ERP | Generate financial report | 1 | 1 | 3 | 1 | 2 | 10.1 | 1 |
-| 5 | ServiceNow | Route ticket to team | 1 | 2 | 1 | 2 | 1 | 9.1 | 1 |
-| 6 | Salesforce | Add note to opportunity | 1 | 2 | 1 | 1 | 1 | 8.1 | 1 |
-| 7 | ServiceNow | Update ticket priority | 1 | 2 | 2 | 2 | 1 | 10.5 | 1 |
-| 8 | SAP | Create purchase requisition | 3 | 1 | 2 | 2 | 2 | 14.2 | 2 |
-| 9 | Salesforce | Update opportunity stage | 2 | 3 | 2 | 2 | 1 | 13.8 | 2 |
-| 10 | ServiceNow | Escalate to management | 1 | 3 | 2 | 3 | 1 | 13.8 | 2 |
-| 11 | Oracle ERP | Modify vendor record | 2 | 2 | 3 | 3 | 2 | 16.2 | 2 |
-| 12 | SAP | Post journal entry | 4 | 1 | 3 | 3 | 4 | 21.9 | 2 |
-| 13 | Salesforce | Send email to customer | 1 | 4 | 2 | 5 | 2 | 18.6 | 2 |
-| 14 | ServiceNow | Grant system access | 1 | 2 | 5 | 4 | 3 | 20.6 | 2 |
-| 15 | SAP | Approve purchase order > $25K | 5 | 2 | 3 | 4 | 4 | 25.7 | 3 |
-| 16 | Salesforce | Modify customer contract | 4 | 5 | 3 | 5 | 4 | 29.1 | 3 |
-| 17 | Oracle ERP | Submit payment batch | 5 | 3 | 4 | 5 | 5 | 31.2 | 3 |
-| 18 | SAP | Change GL account structure | 4 | 2 | 5 | 5 | 5 | 29.6 | 3 |
+**Step 3: Flag discrepancies and route for resolution.** Financial Exposure: 3 (routing errors delay payment, affect vendor relationships). System Impact: 3 (creates tasks, sends notifications). Reversibility: 2 (routing can be reassigned). Regulatory Scope: 2 (pre-posting workflow). **Total: 10. Tier 2.** Executes immediately, but the routing decision enters a review queue.
 
-Print this table. Walk through it with your compliance and operations teams. Adjust scores based on your specific context. The scoring model is a starting point, not a finished product.
+**Step 4: Post matched invoice for payment.** Financial Exposure: 5 (direct financial commitment). System Impact: 4 (triggers AP posting, GL entries, potential payment run). Reversibility: 4 (requires correcting entries with audit trail). Regulatory Scope: 5 (SOX-controlled financial posting). **Total: 18. Tier 3.** Blocked until an AP manager approves.
 
-## Control Patterns Per Tier
+One process, four steps, three different risk tiers. That is the granularity you need.
 
-Each tier maps to a specific control pattern. Do not mix patterns within a tier, or you create confusion about what level of oversight applies.
+## The Rules Engine Behind the Tiers
 
-| Tier | Control Pattern | What It Means | Audit Requirement |
-| --- | --- | --- | --- |
-| **Tier 1** | Auto-execute + log | Agent executes immediately. Action logged for async review if needed. | Structured log, 30-day retention |
-| **Tier 2a** | Auto-execute + mandatory review | Agent executes, but action enters review queue. Reviewer can trigger rollback. | Evidence bundle, 1-year retention |
-| **Tier 2b** | Review-then-execute | Agent queues action for review. Executes only after reviewer confirms. | Evidence bundle + decision record, 1-year retention |
-| **Tier 3** | Approve-then-execute | Agent halts. Named approver must explicitly approve before execution. | Full decision trace, 7-year retention |
-| **Tier 3+** | Manual-only | Agent generates recommendation. Human performs the action directly in the target system. | Recommendation log + manual action record |
+Scoring alone does not handle the real complexity of enterprise approval logic. An invoice for $500 has different governance requirements than one for $500,000, even if both score identically on the four dimensions. A procurement action in a regulated cost center needs different controls than the same action in a general overhead center.
 
-Note the split within Tier 2. Some Tier 2 actions (like routing a ticket to a new team) are safe to execute with post-review. Others (like sending a customer email) should be reviewed before execution. Your action classification should distinguish between 2a and 2b.
+We use a neuro-symbolic rules engine that combines neural confidence scores with deterministic business rules. The neural side evaluates the agent's confidence in its decision: did the invoice matching agent identify the line items correctly? Is the extraction confidence above threshold? The deterministic side applies hard business rules that never bend regardless of confidence.
 
-## Handling Tier Migration
+The rule types break down into four categories:
 
-Actions do not stay at the same risk tier forever. A well-calibrated system promotes actions to lower tiers as they build a track record.
+- **Compliance rules** enforce regulatory requirements. SOX controls on financial postings, data residency restrictions, segregation of duties.
+- **Validation rules** check data integrity. Does the PO exist? Does the amount match within tolerance? Are required fields populated?
+- **Routing rules** determine who reviews or approves. Based on amount thresholds, cost center ownership, document type, organizational hierarchy.
+- **Threshold rules** set dynamic approval levels. Different dollar amounts trigger different approval chains. Different document types require different reviewers.
 
-**Promotion criteria (move action to a lower tier):**
+These rules evaluate using operators like `equals`, `greater_than`, `less_than`, `contains`, and specialized operators like `count_less_than` and `has_duplicates` for batch validations. The key detail: every rule evaluation is logged with the neural confidence score that accompanied it. When an agent decides an invoice matches a PO at 94% confidence and the threshold rule requires 90%, the audit trail shows both numbers and the rule that was applied.
 
-- Minimum 200 successful executions without incident
-- Zero policy violations in the trailing 90-day window
-- Error rate below 0.5% for the specific action type
-- Formal review and sign-off by the governance owner
+Customers define their own rules per tenant. A pharmaceutical company's compliance rules look nothing like a manufacturing firm's. The framework is the same; the rule definitions are entirely customer-specific.
 
-**Demotion triggers (move action to a higher tier):**
+## How Approval Thresholds Actually Work
 
-- Any single incident involving financial loss or customer impact
-- Error rate exceeding 2% in any 30-day window
-- Change in underlying system, API, or data schema
-- Regulatory or policy change affecting the action scope
+Static tier assignments are not enough. The same action type can require different approval paths depending on context. Our approval thresholds evaluate across five contextual dimensions:
 
-**Example:** An agent initially classified as Tier 2b for "create purchase requisition in SAP" runs 300 requisitions over 4 months with zero issues. The governance team reviews and promotes it to Tier 2a (auto-execute with review). Three months later, SAP undergoes a major version upgrade. The action is temporarily demoted back to Tier 2b until 50 successful executions validate the new integration.
+**Document type.** A standard purchase order versus a blanket purchase agreement versus a contract amendment, each carries different inherent risk even at the same dollar amount.
 
-Tier migration is how you scale agent autonomy without taking a leap of faith. You expand autonomy based on evidence, not optimism.
+**Amount.** Obvious but nuanced. The thresholds are not just "above $10K needs VP approval." They layer: under $1K auto-executes, $1K-$10K needs manager review, $10K-$50K needs director approval, above $50K needs VP sign-off.
 
-## Concrete Example: Customer Service Agent
+**Cost center.** Actions against R&D cost centers might auto-execute at higher thresholds than actions against regulated manufacturing cost centers.
 
-A B2B SaaS company deploys a customer service agent integrated with Salesforce and ServiceNow. Here is how the agent's actions break down by tier:
+**User role.** An agent acting on behalf of a procurement specialist has different authority than one acting on behalf of an accounts payable clerk, mirroring the same role-based controls the organization already enforces for human users.
 
-**Tier 1 actions (auto-execute):**
-- Read customer ticket history
-- Summarize ticket for internal routing
-- Update ticket status to "in progress"
-- Look up product documentation for customer question
+**Policy violations.** If the neural confidence score falls below the configured threshold, or if the action triggers a compliance rule exception, the tier escalates regardless of the base score.
 
-**Tier 2a actions (execute + review):**
-- Route ticket to specialized support team
-- Update customer contact preferences
-- Add internal notes to customer account
+## Agent Evolution: Earned Autonomy
 
-**Tier 2b actions (review + execute):**
-- Send response email to customer
-- Escalate ticket to account manager with priority change
+Agents do not stay at the same tier forever. An agent that consistently operates without incidents earns more autonomy. An agent that triggers violations loses it.
 
-**Tier 3 actions (approval required):**
-- Issue refund > $200
-- Modify service agreement terms
-- Grant extended trial or credit
+Agents classified in lower tiers based on their track record get promoted: fewer review requirements, higher auto-execution thresholds. Agents with policy violations or elevated error rates get demoted: tighter controls, lower thresholds, more frequent review.
 
-**Before tiering:** The agent required human approval for every action. Support team handled 40 tickets per day per agent. Average resolution time was 6 hours because approval queues backed up.
+This is not theoretical. We track it across all 385+ agents in production. An SAP invoice processing agent that runs 500 successful 3-way matches without a single exception gets its Tier 2 actions re-evaluated for potential Tier 1 promotion. A Salesforce deal routing agent that misroutes two opportunities in a month gets its Tier 1 actions temporarily elevated to Tier 2 with mandatory review.
 
-**After tiering:** Tier 1 actions execute instantly. Tier 2 actions process with lightweight review. Only 8% of actions require Tier 3 approval. Throughput increased to 110 tickets per day. Average resolution time dropped to 1.4 hours. Customer satisfaction scores improved 18%.
+The promotion and demotion logic is deterministic, not discretionary. The governance team sets the criteria; the system applies them automatically.
 
-The agent did not become less governed. It became appropriately governed.
+## Metrics That Keep Tiering Honest
 
-## Metrics That Matter
+Risk tiering only works if you measure whether the tiers are correctly calibrated. Three metrics matter most:
 
-| Metric | Target | Signal |
-| --- | --- | --- |
-| **Tier accuracy** | < 3% of actions reclassified after review | Your scoring model correctly predicts risk |
-| **Override rate** | < 5% of Tier 3 approvals are overrides | Tier 3 is not over-classified |
-| **Incident rate by tier** | Tier 1 < 0.01%, Tier 2 < 0.1%, Tier 3 < 0.5% | Control patterns match actual risk |
-| **Tier migration rate** | 10-20% of actions migrate per quarter | System is learning and adapting |
-| **Approval queue time** | Tier 2b < 30 min, Tier 3 < 2 hours | Governance is operationally viable |
-| **Autonomy ratio** | > 60% of actions at Tier 1 | Agent is delivering value, not just generating work |
+**Governance overhead: target less than 5%.** This is the percentage of total agent processing time spent on governance activities, approvals, reviews, audit logging. If governance consumes more than 5% of processing capacity, your tiers are too conservative or your approval workflows are too slow.
 
-If your autonomy ratio is below 40%, your tier classification is too conservative. If your incident rate at Tier 1 exceeds 0.1%, your classification is too aggressive. Both problems have the same fix: recalibrate the scoring model with real production data.
+**False positive rate: target less than 15%.** The percentage of Tier 3 actions that reviewers approve without modification. If more than 15% of blocked actions turn out to be perfectly fine, your scoring model is over-classifying risk and creating unnecessary friction.
+
+**Override rate: target less than 5%.** The percentage of governance decisions that human operators override. High override rates mean the rules engine and the humans disagree about risk, which means either the rules are wrong or the humans need recalibration on policy.
+
+If your governance overhead exceeds 5%, start by examining whether Tier 2 review windows are creating queues. If your false positive rate exceeds 15%, your scoring thresholds need adjustment, likely the Tier 2/Tier 3 boundary. If overrides exceed 5%, audit the specific rules being overridden and determine whether the rule or the override pattern is correct.
 
 ## Where to Go Next
 
-- [HITL Governance Design Patterns](/blog/hitl-governance-design-patterns) — how to implement approval gates, review queues, and escalation paths for each tier
-- [Audit Trail for Autonomous Systems](/blog/audit-trail-for-autonomous-systems-practical-playbook) — building the audit infrastructure that risk tiering depends on
-- [Autonomous Operations with Human Approval](/blog/autonomous-operations-with-human-approval-practical-playbook) — operating model for scaling agent autonomy across the enterprise
+- [Agent Governance Risk Matrix Tool](/tools/agent-governance-risk-matrix) — interactive tool to score and classify your own agent actions across the four dimensions
+- [Enterprise Agent Governance Checklist](/blog/enterprise-agent-governance-checklist) — the operational checklist for standing up governance around tiered agents
+- [HITL Governance Design Patterns](/blog/hitl-governance-design-patterns) — approval gates, review queues, and escalation paths for each tier
 
 ## Bottom Line
 
-Risk tiering is not about limiting what agents can do. It is about defining precisely what agents can do at each level of autonomy, with controls that match the actual risk of each action. Score actions across five dimensions, map them to tiers, assign control patterns, and build a promotion path based on track record. That is how you move from "AI is too risky" to "AI is appropriately governed" in production.
+Risk tiering is not about limiting agents. It is about giving each agent action exactly the right level of autonomy and oversight based on what can actually go wrong. Score across four dimensions, map to three tiers with concrete control patterns, let agents earn their way to more autonomy through track record, and measure whether your tiers are calibrated correctly. That is how you move from "AI is too risky" to "AI is appropriately governed" with 385+ agents running in production across your enterprise stack.
