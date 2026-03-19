@@ -20,7 +20,9 @@ export default function EmailCapture({ source, heading, description, className }
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [submitting, setSubmitting] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError('')
 
@@ -30,17 +32,27 @@ export default function EmailCapture({ source, heading, description, className }
       return
     }
 
-    // Store to localStorage
+    setSubmitting(true)
+
+    // POST to API route
     try {
-      const existing = JSON.parse(localStorage.getItem('qorsync_emails') || '[]') as string[]
-      if (!existing.includes(trimmed)) {
-        existing.push(trimmed)
-        localStorage.setItem('qorsync_emails', JSON.stringify(existing))
-      }
-      localStorage.setItem('qorsync_last_email', trimmed)
-      localStorage.setItem('qorsync_email_source', source)
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: trimmed, source }),
+      })
+      if (!res.ok) throw new Error('Subscribe failed')
     } catch {
-      // localStorage unavailable — proceed silently
+      // Fallback: store locally if API fails
+      try {
+        const existing = JSON.parse(localStorage.getItem('qorsync_emails') || '[]') as string[]
+        if (!existing.includes(trimmed)) {
+          existing.push(trimmed)
+          localStorage.setItem('qorsync_emails', JSON.stringify(existing))
+        }
+      } catch {
+        // ignore
+      }
     }
 
     // Fire GA event
@@ -52,6 +64,7 @@ export default function EmailCapture({ source, heading, description, className }
       })
     }
 
+    setSubmitting(false)
     setSubmitted(true)
   }
 
@@ -89,9 +102,10 @@ export default function EmailCapture({ source, heading, description, className }
         />
         <button
           type="submit"
-          className="rounded-xl bg-gradient-to-r from-[#093E8F] to-[#1C74BC] px-6 py-3 font-semibold text-white transition hover:from-[#0A3F8F] hover:to-[#26AAE3]"
+          disabled={submitting}
+          className="rounded-xl bg-gradient-to-r from-[#093E8F] to-[#1C74BC] px-6 py-3 font-semibold text-white transition hover:from-[#0A3F8F] hover:to-[#26AAE3] disabled:opacity-50"
         >
-          Subscribe
+          {submitting ? 'Subscribing...' : 'Subscribe'}
         </button>
       </form>
       {error ? <p className="mt-2 text-sm text-red-400">{error}</p> : null}
