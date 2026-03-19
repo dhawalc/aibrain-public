@@ -20,7 +20,9 @@
     "keywords:plan": "node scripts/keywords-plan.mjs",
     "articles:bulk": "node scripts/articles-bulk-generate.mjs",
     "analytics:discover": "node scripts/analytics-discover.mjs",
-    "metrics:ingest": "node scripts/metrics-ingest.mjs"
+    "metrics:ingest": "node scripts/metrics-ingest.mjs",
+    "indexnow:submit": "node scripts/indexnow-submit.mjs",
+    "indexnow:dry-run": "node scripts/indexnow-submit.mjs --dry-run"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
