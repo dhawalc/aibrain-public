@@ -1,13 +1,16 @@
 ---
-title: "Enterprise Task Routing with AI Agents: How to Get the Right Work to the Right Queue"
-description: "A practical framework for AI-powered task routing across IT, finance, support, and shared services with prioritization rules, escalation paths, and SLA enforcement."
-date: "2026-03-09"
-category: "Agentic Automation & Orchestration"
-author: "Dhawal Chheda, AI Leader at Accel4"
-readTime: "10 min read"
+title: >-
+  Enterprise Task Routing with AI Agents: Architecture and Controls
+description: >-
+  Design AI task routing across enterprise queues with intent classification,
+  priority scoring, escalation logic, and SLA controls to reduce bounce and
+  delay.
+date: '2026-03-09'
+category: Agentic Automation & Orchestration
+author: 'Dhawal Chheda, AI Leader at Accel4'
+readTime: 8 min read
 published: true
 ---
-
 ## The routing problem nobody talks about
 
 Most enterprise teams think their routing is fine until they measure it. Then they discover that 30-40% of tickets land in the wrong queue on first assignment. A password reset goes to the network team. A billing dispute ends up in general support. A P1 infrastructure alert sits in a low-priority backlog for two hours because someone fat-fingered the urgency field.
@@ -108,3 +111,10 @@ Task routing is the foundation, but routing decisions often trigger downstream w
 ## Bottom line
 
 Routing is not a configuration problem -- it is a classification problem. Rules-based systems fail because they cannot interpret context, compute priority from real signals, or learn from outcomes. AI agents that classify intent, score urgency, match skills, and auto-resolve simple tasks cut resolution time by 50-70% and free your senior staff to work on problems that actually need them.
+
+## Related Implementation Resources
+
+- [AI Approval Workflow Design Template](/blog/ai-approval-workflow)
+- [AI Agent Risk Tiering Framework](/blog/ai-agent-risk-tiering-framework)
+- [Enterprise Agent Governance Checklist](/blog/enterprise-agent-governance-checklist)
+- [Automation Readiness Assessment](/tools/automation-readiness-assessment)

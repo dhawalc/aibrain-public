@@ -20,7 +20,7 @@ const BLOG_DIR = path.join(__dirname, '..', 'content', 'blog')
 
 const SITE_URL = 'https://qorsync.online'
 const HOST = 'qorsync.online'
-const API_KEY = '52cf254b147fe478f1a06005e7338bea'
+const API_KEY = '216b1b205097c014b135977655252a6b'
 const KEY_LOCATION = `${SITE_URL}/${API_KEY}.txt`
 
 const INDEXNOW_ENDPOINTS = [

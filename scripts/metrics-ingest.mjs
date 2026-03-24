@@ -7,8 +7,8 @@ import { randomUUID } from 'crypto'
 import { initSchema, closeDb, persistMetrics } from './agents/db.mjs'
 
 const USER_PROJECT = process.env.GCP_QUOTA_PROJECT || 'aibrain-ceo-live-20260218'
-const GA4_PROPERTY_ID = process.env.GA4_PROPERTY_ID || ''
-const GSC_SITE_URL = process.env.GSC_SITE_URL || ''
+const GA4_PROPERTY_ID = process.env.GA4_PROPERTY_ID || '526301790'
+const GSC_SITE_URL = process.env.GSC_SITE_URL || 'sc-domain:qorsync.online'
 
 function getToken() {
   return execSync('gcloud auth application-default print-access-token', { encoding: 'utf-8' }).trim()
@@ -49,10 +49,11 @@ async function ingestGA4(startDate, endDate) {
       enabled: false,
       reason: 'GA4_PROPERTY_ID not set',
       rows: [],
+      aggregate: null,
     }
   }
 
-  const body = {
+  const pageBody = {
     dateRanges: [{ startDate, endDate }],
     dimensions: [{ name: 'pagePath' }],
     metrics: [{ name: 'sessions' }, { name: 'engagedSessions' }, { name: 'screenPageViews' }],
@@ -60,8 +61,13 @@ async function ingestGA4(startDate, endDate) {
     limit: '200',
   }
 
+  const aggregateBody = {
+    dateRanges: [{ startDate, endDate }],
+    metrics: [{ name: 'newUsers' }, { name: 'totalUsers' }, { name: 'sessions' }, { name: 'screenPageViews' }],
+  }
+
   const url = `https://analyticsdata.googleapis.com/v1beta/properties/${GA4_PROPERTY_ID}:runReport`
-  const result = await apiPost(url, body)
+  const [result, aggregateResult] = await Promise.all([apiPost(url, pageBody), apiPost(url, aggregateBody)])
 
   const rows = (result.rows || []).map((row) => ({
     pagePath: row.dimensionValues?.[0]?.value || '',
@@ -70,10 +76,18 @@ async function ingestGA4(startDate, endDate) {
     views: Number(row.metricValues?.[2]?.value || 0),
   }))
 
+  const aggregate = {
+    newUsers: Number(aggregateResult.rows?.[0]?.metricValues?.[0]?.value || 0),
+    totalUsers: Number(aggregateResult.rows?.[0]?.metricValues?.[1]?.value || 0),
+    sessions: Number(aggregateResult.rows?.[0]?.metricValues?.[2]?.value || 0),
+    views: Number(aggregateResult.rows?.[0]?.metricValues?.[3]?.value || 0),
+  }
+
   return {
     enabled: true,
     propertyId: GA4_PROPERTY_ID,
     rows,
+    aggregate,
   }
 }
 
@@ -125,12 +139,16 @@ async function safeIngest(label, fn) {
 }
 
 function summarize(ga4, gsc) {
-  const gaSessions = ga4.rows.reduce((sum, row) => sum + row.sessions, 0)
-  const gaViews = ga4.rows.reduce((sum, row) => sum + row.views, 0)
+  const gaSessions = ga4.aggregate?.sessions ?? ga4.rows.reduce((sum, row) => sum + row.sessions, 0)
+  const gaViews = ga4.aggregate?.views ?? ga4.rows.reduce((sum, row) => sum + row.views, 0)
+  const gaNewUsers = ga4.aggregate?.newUsers ?? 0
+  const gaTotalUsers = ga4.aggregate?.totalUsers ?? 0
   const gscClicks = gsc.rows.reduce((sum, row) => sum + row.clicks, 0)
   const gscImpressions = gsc.rows.reduce((sum, row) => sum + row.impressions, 0)
 
   return {
+    ga4TotalUsers: gaTotalUsers,
+    ga4NewUsers: gaNewUsers,
     ga4TotalSessions: gaSessions,
     ga4TotalViews: gaViews,
     gscTotalClicks: gscClicks,
@@ -141,7 +159,11 @@ function summarize(ga4, gsc) {
 async function ensureEnvTemplateHasAnalyticsVars() {
   const file = path.join(process.cwd(), '.env.local.example')
   const raw = await readFile(file, 'utf-8')
-  const additions = ['GA4_PROPERTY_ID=', 'GSC_SITE_URL=', 'GCP_QUOTA_PROJECT=aibrain-ceo-live-20260218']
+  const additions = [
+    'GA4_PROPERTY_ID=526301790',
+    'GSC_SITE_URL=sc-domain:qorsync.online',
+    'GCP_QUOTA_PROJECT=aibrain-ceo-live-20260218',
+  ]
   let output = raw
 
   for (const line of additions) {
@@ -211,7 +233,9 @@ async function main() {
   await closeDb(conn)
 
   console.log(`Saved metrics snapshot to ${outPath}`)
-  console.log(`Summary: sessions=${summary.ga4TotalSessions}, views=${summary.ga4TotalViews}, clicks=${summary.gscTotalClicks}, impressions=${summary.gscTotalImpressions}`)
+  console.log(
+    `Summary: users=${summary.ga4TotalUsers}, newUsers=${summary.ga4NewUsers}, sessions=${summary.ga4TotalSessions}, views=${summary.ga4TotalViews}, clicks=${summary.gscTotalClicks}, impressions=${summary.gscTotalImpressions}`,
+  )
 
   if (!ga4.enabled || !gsc.enabled) {
     console.log('Note: set GA4_PROPERTY_ID and GSC_SITE_URL to enable full ingestion.')

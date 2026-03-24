@@ -5,7 +5,7 @@ date: "2026-02-27"
 category: "SAP Integration"
 author: "Dhawal Chheda, AI Leader at Accel4"
 readTime: "10 min read"
-published: false
+published: true
 ---
 
 # Enterprise API Management for SAP S/4HANA: The 2026 Guide

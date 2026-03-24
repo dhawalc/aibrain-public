@@ -5,7 +5,7 @@ import DemoCta from '@/components/demo-cta'
 import { SITE_URL } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: 'Workflow Automation Readiness Assessment | QorSync AI',
+  title: 'Workflow Automation Readiness Assessment',
   description:
     'Evaluate your team\'s readiness for AI-powered workflow automation across process maturity, data quality, and organizational governance.',
   alternates: {
@@ -53,7 +53,7 @@ export default function AutomationReadinessAssessmentPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <header className="border-b border-slate-800 bg-slate-950/50 backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <Link href="/landing" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-[#093E8F] to-[#1C74BC] font-bold text-white">
               Q
             </div>

@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useState } from 'react'
 import DemoCta from '@/components/demo-cta'
 
@@ -486,12 +487,12 @@ export default function AgentGovernanceRiskMatrix() {
           >
             Request Governance Review
           </DemoCta>
-          <a
+          <Link
             href="/blog/ai-agent-risk-tiering-framework"
             className="inline-flex items-center justify-center rounded-xl border border-slate-700 px-5 py-3 font-semibold text-white transition hover:border-cyan-400"
           >
             Read the Risk Framework
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ date: "2026-02-27"
 category: "SAP Migration"
 author: "Dhawal Chheda, AI Leader at Accel4"
 readTime: "9 min read"
-published: false
+published: true
 ---
 
 # How to Reduce SAP S/4HANA Migration Costs by 60%

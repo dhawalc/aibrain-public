@@ -1,13 +1,15 @@
 ---
-title: "Human-in-the-Loop Governance for Agentic Systems: Design Patterns That Work"
-description: "Design patterns for approval gates, risk tiers, audit trails, and operating boundaries in production-grade enterprise agent systems."
-date: "2026-03-09"
-category: "Governance, Risk & Compliance"
-author: "Dhawal Chheda, AI Leader at Accel4"
-readTime: "11 min read"
+title: >-
+  HITL Governance Design Patterns for Enterprise AI Workflows
+description: >-
+  Use seven production-tested human-in-the-loop governance patterns to scale AI
+  agents with approval gates, escalation controls, and audit-ready traceability.
+date: '2026-03-09'
+category: 'Governance, Risk & Compliance'
+author: 'Dhawal Chheda, AI Leader at Accel4'
+readTime: 9 min read
 published: true
 ---
-
 ## Why Most HITL Implementations Fail
 
 I have watched teams build HITL governance three different ways, and two of them fail the same way every time.
@@ -134,3 +136,10 @@ For a comprehensive operational checklist covering all of these metrics, see our
 HITL governance is the control architecture that determines whether your agent systems can scale past pilot stage. It is not a compliance checkbox and it is not a confidence threshold. It is a state machine, an approval surface, an SLA enforcement engine, and an eight-layer security stack, all working together through a single control plane.
 
 Design governance around actions and risk tiers. Make it fast enough that nobody routes around it. Make it auditable enough that compliance teams trust it. Make it impossible to bypass. That is how 385+ agents earn trust in production.
+
+## Related Implementation Resources
+
+- [AI Agent Risk Tiering Framework](/blog/ai-agent-risk-tiering-framework)
+- [AI Approval Workflow Design Template](/blog/ai-approval-workflow)
+- [Enterprise Agent Governance Checklist](/blog/enterprise-agent-governance-checklist)
+- [Agent Governance Risk Matrix Tool](/tools/agent-governance-risk-matrix)

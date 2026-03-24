@@ -4,7 +4,7 @@ import DemoCta from '@/components/demo-cta'
 import { SITE_URL } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: 'Enterprise AI Tools | QorSync AI',
+  title: 'Enterprise AI Tools',
   description: 'Free tools to size the business case for AI-powered workflow automation, assess readiness, and design governance controls.',
   alternates: {
     canonical: '/tools',
@@ -59,6 +59,9 @@ export default function ToolsPage() {
           <nav className="hidden items-center gap-8 md:flex">
             <Link href="/" className="text-slate-300 transition hover:text-white">
               Home
+            </Link>
+            <Link href="/solutions" className="text-slate-300 transition hover:text-white">
+              Solutions
             </Link>
             <Link href="/blog" className="text-slate-300 transition hover:text-white">
               Blog

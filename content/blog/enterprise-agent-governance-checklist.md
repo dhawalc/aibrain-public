@@ -1,13 +1,14 @@
 ---
-title: "Enterprise Agent Governance Checklist: 40 Questions Before You Deploy AI Agents"
-description: "A practical checklist covering risk classification, approval boundaries, audit requirements, rollback strategy, and compliance controls for enterprise AI agents."
-date: "2026-03-10"
-category: "Governance, Risk & Compliance"
-author: "Dhawal Chheda, AI Leader at Accel4"
-readTime: "12 min read"
+title: 'Enterprise Agent Governance Checklist for AI Operations'
+description: >-
+  Use this 40-question checklist to validate approval boundaries, rollback
+  readiness, auditability, and compliance controls before launching AI agents.
+date: '2026-03-10'
+category: 'Governance, Risk & Compliance'
+author: 'Dhawal Chheda, AI Leader at Accel4'
+readTime: 10 min read
 published: true
 ---
-
 ## Why a Checklist Beats a Policy Document
 
 Most enterprises have governance policies. Few have governance adoption. The gap is not intention but format. A 40-page policy document sits in SharePoint. A checklist gets used in the deployment meeting.
@@ -160,3 +161,10 @@ A checklist tells you where you stand. It does not tell you how to fix the gaps.
 - [AI Agent Audit Trail Requirements](/blog/ai-agent-audit-trail-requirements) details what to log, how to store it, and compliance mapping
 
 Start with the red flags. Fix those first. Then work through the remaining gaps category by category. The checklist is the starting line, not the finish line.
+
+## Related Implementation Resources
+
+- [AI Agent Risk Tiering Framework](/blog/ai-agent-risk-tiering-framework)
+- [AI Approval Workflow Design Template](/blog/ai-approval-workflow)
+- [Human-in-the-Loop Governance Design Patterns](/blog/hitl-governance-design-patterns)
+- [Automation Readiness Assessment](/tools/automation-readiness-assessment)
