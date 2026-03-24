@@ -10,6 +10,13 @@ category: Agentic Automation & Orchestration
 author: 'Dhawal Chheda, AI Leader at Accel4'
 readTime: 8 min read
 published: true
+faq:
+  - q: "How does AI agent task routing work in enterprises?"
+    a: "AI agent task routing uses queue policies, risk-adjusted priority scoring, and approver load balancing to direct tasks to the right handler based on complexity, SLA requirements, and available capacity."
+  - q: "What are the benefits of AI-powered task routing?"
+    a: "AI task routing reduces average approval time by 60%, eliminates queue bottlenecks, enforces SLA compliance through timeout escalation, and increases throughput without reducing governance coverage."
+  - q: "How do you design escalation paths for AI workflows?"
+    a: "Design escalation paths with SLA-driven timeouts that automatically route unactioned requests to backup approvers or management, ensuring no request stalls regardless of individual availability."
 ---
 ## The routing problem nobody talks about
 

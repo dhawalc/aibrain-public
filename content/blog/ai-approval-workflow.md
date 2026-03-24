@@ -9,6 +9,13 @@ category: Approval Workflows & Governance
 author: 'Dhawal Chheda, AI Leader at Accel4'
 readTime: 8 min read
 published: true
+faq:
+  - q: "What is an AI approval workflow?"
+    a: "An AI approval workflow uses risk scoring and intelligent routing to automatically process low-risk requests while escalating high-impact decisions to human approvers with full context."
+  - q: "How does risk-tiered approval routing work?"
+    a: "Requests are scored across four dimensions — financial exposure, system impact, reversibility, and regulatory scope — with composite scores determining whether actions auto-approve, go to a single reviewer, or require committee review."
+  - q: "What is the ROI of AI approval automation?"
+    a: "Organizations typically see 60% faster approval cycle times, reduced manual review burden, and stronger compliance coverage through structured audit trails and SLA enforcement."
 ---
 Every enterprise has the same approval problem. Low-risk requests sit in the same queue as material exceptions. Approvers get a notification with no context. Escalation paths are unclear. And six months later, nobody can explain why a request was approved, rejected, or re-routed.
 

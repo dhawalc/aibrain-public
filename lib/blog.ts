@@ -19,8 +19,11 @@ export type BlogPostMeta = {
   topicKey: string
 }
 
+export type FaqItem = { q: string; a: string }
+
 export type BlogPost = BlogPostMeta & {
   content: string
+  faq?: FaqItem[]
 }
 
 type Frontmatter = Partial<{
@@ -213,7 +216,10 @@ export async function getArticleBySlug(slug: string): Promise<BlogPost | null> {
       const { data, content } = matter(raw)
       const meta = toMeta(slug, data as Frontmatter, content)
       if (!meta.published) return null
-      return { ...meta, content }
+      const faq = Array.isArray((data as Record<string, unknown>).faq)
+        ? ((data as Record<string, unknown>).faq as FaqItem[])
+        : undefined
+      return { ...meta, content, faq }
     } catch {
       continue
     }

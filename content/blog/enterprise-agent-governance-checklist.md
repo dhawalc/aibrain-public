@@ -8,6 +8,13 @@ category: 'Governance, Risk & Compliance'
 author: 'Dhawal Chheda, AI Leader at Accel4'
 readTime: 10 min read
 published: true
+faq:
+  - q: "What should an enterprise AI agent governance checklist include?"
+    a: "A governance checklist should cover risk classification, approval gates, audit trail requirements, rollback controls, human oversight checkpoints, and compliance documentation for each agent deployment."
+  - q: "How do you govern autonomous AI agents in production?"
+    a: "Govern AI agents through risk-tiered execution policies, mandatory human checkpoints for high-impact actions, complete decision audit trails, and continuous monitoring with automated rollback capabilities."
+  - q: "What are the biggest risks of deploying AI agents in enterprises?"
+    a: "Key risks include uncontrolled autonomous actions, missing audit trails, lack of rollback capability, regulatory non-compliance, and insufficient human oversight for high-impact decisions."
 ---
 ## Why a Checklist Beats a Policy Document
 

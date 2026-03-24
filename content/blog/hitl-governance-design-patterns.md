@@ -9,6 +9,13 @@ category: 'Governance, Risk & Compliance'
 author: 'Dhawal Chheda, AI Leader at Accel4'
 readTime: 9 min read
 published: true
+faq:
+  - q: "What are HITL governance design patterns?"
+    a: "Human-in-the-loop governance patterns are structured approaches for keeping humans in control of AI agent decisions, including risk-tiered routing, context-packed review, timeout escalation, and feedback loops."
+  - q: "When should AI agents require human approval?"
+    a: "AI agents should require human approval for high-risk actions with significant financial exposure, irreversible system changes, or regulatory implications — while low-risk routine tasks can be auto-approved with logging."
+  - q: "How do you prevent HITL from becoming a bottleneck?"
+    a: "Use risk tiering to route only high-impact decisions to humans, provide decision-ready context packs instead of raw data, and implement timeout escalation so requests never stall in an inbox."
 ---
 ## Why Most HITL Implementations Fail
 

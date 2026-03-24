@@ -9,6 +9,13 @@ category: 'Governance, Risk & Compliance'
 author: 'Dhawal Chheda, AI Leader at Accel4'
 readTime: 9 min read
 published: true
+faq:
+  - q: "What is an AI agent risk tiering framework?"
+    a: "A risk tiering framework classifies AI agent actions by impact level across dimensions like financial exposure, system scope, reversibility, and regulatory requirements to determine appropriate governance controls."
+  - q: "How do you classify AI agent risk levels?"
+    a: "Score each agent action on four dimensions — financial exposure, system impact, reversibility, and regulatory scope — each rated 1-5, then use the composite score to assign risk tiers that determine approval requirements."
+  - q: "What governance controls do high-risk AI agents need?"
+    a: "High-risk agents need committee-level approval gates, full decision audit trails, automated rollback controls, real-time monitoring, and explicit compliance documentation before execution."
 ---
 ## Why Most Agent Governance Fails Before It Ships
 
