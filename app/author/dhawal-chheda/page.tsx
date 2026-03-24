@@ -1,10 +1,24 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getAllArticles } from '@/lib/blog'
+import { SITE_URL } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Dhawal Chheda | AI Leader at Accel4',
   description: 'Articles and operating notes by Dhawal Chheda, AI Leader at Accel4.',
+  alternates: {
+    canonical: '/author/dhawal-chheda',
+  },
+  openGraph: {
+    title: 'Dhawal Chheda | AI Leader at Accel4',
+    description: 'Articles and operating notes by Dhawal Chheda, AI Leader at Accel4.',
+    url: `${SITE_URL}/author/dhawal-chheda`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Dhawal Chheda | AI Leader at Accel4',
+    description: 'Articles and operating notes by Dhawal Chheda, AI Leader at Accel4.',
+  },
 }
 
 const personJsonLd = {
@@ -12,7 +26,7 @@ const personJsonLd = {
   '@type': 'Person',
   name: 'Dhawal Chheda',
   jobTitle: 'AI Leader at Accel4',
-  url: 'https://qorsync.online/author/dhawal-chheda',
+  url: `${SITE_URL}/author/dhawal-chheda`,
 }
 
 export default async function AuthorPage() {

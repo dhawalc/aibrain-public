@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og'
-import { getArticleBySlug } from '@/lib/blog'
+import { getArticleBySlug, resolveCanonicalArticleSlug } from '@/lib/blog'
 
 export const alt = 'QorSync AI Blog'
 export const size = { width: 1200, height: 630 }
@@ -7,7 +7,8 @@ export const contentType = 'image/png'
 
 export default async function OGImage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const post = await getArticleBySlug(slug)
+  const canonicalSlug = await resolveCanonicalArticleSlug(slug)
+  const post = canonicalSlug ? await getArticleBySlug(canonicalSlug) : null
   const title = post?.title ?? 'QorSync AI Blog'
   const category = post?.category ?? 'Blog'
 

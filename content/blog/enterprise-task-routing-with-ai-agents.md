@@ -1,13 +1,23 @@
 ---
-title: "Enterprise Task Routing with AI Agents: How to Get the Right Work to the Right Queue"
-description: "A practical framework for AI-powered task routing across IT, finance, support, and shared services with prioritization rules, escalation paths, and SLA enforcement."
-date: "2026-03-09"
-category: "Agentic Automation & Orchestration"
-author: "Dhawal Chheda, AI Leader at Accel4"
-readTime: "10 min read"
+title: >-
+  Enterprise Task Routing with AI Agents: Architecture and Controls
+description: >-
+  Design AI task routing across enterprise queues with intent classification,
+  priority scoring, escalation logic, and SLA controls to reduce bounce and
+  delay.
+date: '2026-03-09'
+category: Agentic Automation & Orchestration
+author: 'Dhawal Chheda, AI Leader at Accel4'
+readTime: 8 min read
 published: true
+faq:
+  - q: "How does AI agent task routing work in enterprises?"
+    a: "AI agent task routing uses queue policies, risk-adjusted priority scoring, and approver load balancing to direct tasks to the right handler based on complexity, SLA requirements, and available capacity."
+  - q: "What are the benefits of AI-powered task routing?"
+    a: "AI task routing reduces average approval time by 60%, eliminates queue bottlenecks, enforces SLA compliance through timeout escalation, and increases throughput without reducing governance coverage."
+  - q: "How do you design escalation paths for AI workflows?"
+    a: "Design escalation paths with SLA-driven timeouts that automatically route unactioned requests to backup approvers or management, ensuring no request stalls regardless of individual availability."
 ---
-
 ## The routing problem nobody talks about
 
 Most enterprise teams think their routing is fine until they measure it. Then they discover that 30-40% of tickets land in the wrong queue on first assignment. A password reset goes to the network team. A billing dispute ends up in general support. A P1 infrastructure alert sits in a low-priority backlog for two hours because someone fat-fingered the urgency field.
@@ -108,3 +118,12 @@ Task routing is the foundation, but routing decisions often trigger downstream w
 ## Bottom line
 
 Routing is not a configuration problem -- it is a classification problem. Rules-based systems fail because they cannot interpret context, compute priority from real signals, or learn from outcomes. AI agents that classify intent, score urgency, match skills, and auto-resolve simple tasks cut resolution time by 50-70% and free your senior staff to work on problems that actually need them.
+
+## Related Resources
+
+- [AI Approval Workflow Design](/blog/ai-approval-workflow) — Build structured approval pipelines with risk scoring, SLA routing, and escalation logic for routed work
+- [HITL Governance Design Patterns](/blog/hitl-governance-design-patterns) — Human-in-the-loop patterns for approval gates, post-action review, and exception-based escalation
+- [AI Agent Risk Tiering Framework](/blog/ai-agent-risk-tiering-framework) — Score agent actions by financial exposure, system impact, and reversibility to set the right controls
+- [Enterprise Agent Governance Checklist](/blog/enterprise-agent-governance-checklist) — 40 questions to validate approval boundaries, audit coverage, and rollback readiness before deployment
+- [Check Your Automation Readiness](/tools/automation-readiness-assessment) — Free assessment to evaluate whether your routing workflows are ready for AI-driven automation
+- [Calculate Your Approval Workflow ROI](/tools/approval-workflow-roi-calculator) — Estimate hours saved by automating your routing and approval pipeline

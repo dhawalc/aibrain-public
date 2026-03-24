@@ -3,11 +3,13 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SITE_URL } from '@/lib/site'
 
+const DEFAULT_GA_MEASUREMENT_ID = 'G-50B6DD0M9F'
+
 const websiteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'QorSync AI',
-  url: 'https://qorsync.online',
+  url: SITE_URL,
   description: 'Autonomous enterprise operations platform',
   publisher: {
     '@type': 'Organization',
@@ -32,7 +34,19 @@ export const metadata: Metadata = {
     default: 'QorSync AI',
     template: '%s | QorSync AI',
   },
-  description: 'QorSync AI public site and blog. An Accel4 product.',
+  description: 'Enterprise AI workflow automation platform with governed agent execution for ERP, CRM, and ITSM operations.',
+  openGraph: {
+    title: 'QorSync AI',
+    description: 'Enterprise AI workflow automation platform with governed agent execution for ERP, CRM, and ITSM operations.',
+    url: SITE_URL,
+    siteName: 'QorSync AI',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'QorSync AI',
+    description: 'Enterprise AI workflow automation platform with governed agent execution for ERP, CRM, and ITSM operations.',
+  },
 };
 
 export default function RootLayout({
@@ -40,7 +54,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
+  const configuredGaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim()
+  const gaMeasurementId =
+    configuredGaMeasurementId ||
+    (process.env.NODE_ENV === 'production' ? DEFAULT_GA_MEASUREMENT_ID : undefined)
 
   return (
     <html lang="en">
@@ -57,7 +74,7 @@ export default function RootLayout({
                 __html: `window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', '${gaMeasurementId}');`,
+gtag('config', '${gaMeasurementId}', { send_page_view: true });`,
               }}
             />
           </>

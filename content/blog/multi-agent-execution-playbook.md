@@ -89,7 +89,7 @@ The engine handles three problems that break naive multi-agent systems:
 2. **Parallel execution with configurable concurrency.** The engine runs independent tasks concurrently up to a per-agent concurrency limit. An extraction agent might handle 20 documents simultaneously. A heavyweight analytics agent might be limited to 3.
 3. **Intelligent retry with exponential backoff.** When an agent fails, the engine retries with increasing delays. After a configurable number of failures, a circuit breaker trips and routes work to a fallback path: human queue, simplified processing, or hold for manual recovery.
 
-The orchestration engine monitors everything: SAP agents, swarm workers, the document pipeline, knowledge graphs, LLM inference latency, the scheduler, and search operations. Real-time event publishing propagates state changes across the entire agent network. For deeper patterns on how we route tasks, see [enterprise task routing with AI agents](/blog/enterprise-task-routing-with-ai-agents-practical-playbook).
+The orchestration engine monitors everything: SAP agents, swarm workers, the document pipeline, knowledge graphs, LLM inference latency, the scheduler, and search operations. Real-time event publishing propagates state changes across the entire agent network. For deeper patterns on how we route tasks, see [enterprise task routing with AI agents](/blog/enterprise-task-routing-with-ai-agents).
 
 ## Agent Economy: How Agents Earn Their Place
 
@@ -131,7 +131,7 @@ Track these to know whether your multi-agent system is healthy:
 | **Recovery time** | Time to resume after agent failure | < 5 min with circuit breakers |
 | **Agent tier distribution** | Ratio of Intern/Junior to Senior/Expert agents | Healthy systems trend toward 60%+ Senior or above |
 
-Review these weekly. If conflict rate rises above 2%, your agent responsibilities overlap. If human intervention rate exceeds 15%, your [governance tiers are miscalibrated](/blog/human-in-the-loop-governance-model-practical-playbook). If end-to-end time grows while individual agent times stay flat, you have a coordination bottleneck in the orchestration layer.
+Review these weekly. If conflict rate rises above 2%, your agent responsibilities overlap. If human intervention rate exceeds 15%, your [governance tiers are miscalibrated](/blog/hitl-governance-design-patterns). If end-to-end time grows while individual agent times stay flat, you have a coordination bottleneck in the orchestration layer.
 
 ## Getting Started
 

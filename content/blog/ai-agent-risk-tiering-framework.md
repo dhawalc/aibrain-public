@@ -1,13 +1,22 @@
 ---
-title: "AI Agent Risk Tiering Framework: How to Decide What Agents Can Do Autonomously"
-description: "Map agent actions to low, medium, and high-risk tiers with control patterns, approval requirements, and audit rules for enterprise AI."
-date: "2026-03-10"
-category: "Governance, Risk & Compliance"
-author: "Dhawal Chheda, AI Leader at Accel4"
-readTime: "10 min read"
+title: >-
+  AI Agent Risk Tiering Framework for Enterprise Teams
+description: >-
+  Classify AI agent actions by financial exposure, system impact, reversibility,
+  and regulatory scope to set approval tiers that balance speed and control.
+date: '2026-03-10'
+category: 'Governance, Risk & Compliance'
+author: 'Dhawal Chheda, AI Leader at Accel4'
+readTime: 9 min read
 published: true
+faq:
+  - q: "What is an AI agent risk tiering framework?"
+    a: "A risk tiering framework classifies AI agent actions by impact level across dimensions like financial exposure, system scope, reversibility, and regulatory requirements to determine appropriate governance controls."
+  - q: "How do you classify AI agent risk levels?"
+    a: "Score each agent action on four dimensions — financial exposure, system impact, reversibility, and regulatory scope — each rated 1-5, then use the composite score to assign risk tiers that determine approval requirements."
+  - q: "What governance controls do high-risk AI agents need?"
+    a: "High-risk agents need committee-level approval gates, full decision audit trails, automated rollback controls, real-time monitoring, and explicit compliance documentation before execution."
 ---
-
 ## Why Most Agent Governance Fails Before It Ships
 
 Every enterprise AI team hits the same wall. Someone asks: "What can this agent do on its own?" And the answer is either "everything" or "nothing." Both are wrong.
@@ -122,3 +131,12 @@ If your governance overhead exceeds 5%, start by examining whether Tier 2 review
 ## Bottom Line
 
 Risk tiering is not about limiting agents. It is about giving each agent action exactly the right level of autonomy and oversight based on what can actually go wrong. Score across four dimensions, map to three tiers with concrete control patterns, let agents earn their way to more autonomy through track record, and measure whether your tiers are calibrated correctly. That is how you move from "AI is too risky" to "AI is appropriately governed" with 385+ agents running in production across your enterprise stack.
+
+## Related Resources
+
+- [AI Approval Workflow Design](/blog/ai-approval-workflow) — Build risk-scored approval pipelines with SLA routing, escalation logic, and full audit trails
+- [HITL Governance Design Patterns](/blog/hitl-governance-design-patterns) — Pre-action gates, post-action review, and continuous monitoring patterns for each risk tier
+- [Enterprise Agent Governance Checklist](/blog/enterprise-agent-governance-checklist) — 40 production-grade questions to validate risk classification, rollback readiness, and compliance controls
+- [Enterprise Task Routing with AI Agents](/blog/enterprise-task-routing-with-ai-agents) — Design intelligent routing with intent classification, priority scoring, and SLA enforcement
+- [Assess Your Agent Risk Profile](/tools/agent-governance-risk-matrix) — Interactive tool to score and classify your own agent actions across the four risk dimensions
+- [Calculate Your Approval Workflow ROI](/tools/approval-workflow-roi-calculator) — Estimate the hours saved and cost reduction from tiered approval automation

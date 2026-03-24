@@ -75,7 +75,7 @@ These rules prevent the integration failures that consume the most engineering t
 
 **1. Customer is one entity across systems.** Use a universal customer ID that both systems recognize. Map CRM Account ID to ERP Customer Number at integration setup. Every sync operation uses this mapping. Without it, you get duplicate customer records within weeks.
 
-**2. Price is authoritative from ERP.** Never allow the CRM to create or modify pricing that flows back to the ERP. The CRM displays it. Sales reps can request overrides, but approval happens in the ERP (or an [AI-driven approval workflow](/blog/ai-approval-workflow-design-practical-playbook)), and the approved price syncs back.
+**2. Price is authoritative from ERP.** Never allow the CRM to create or modify pricing that flows back to the ERP. The CRM displays it. Sales reps can request overrides, but approval happens in the ERP (or an [AI approval workflow design pattern](/blog/approval-workflow-design-patterns)), and the approved price syncs back.
 
 **3. Order status flows from ERP to CRM, not the reverse.** The ERP is the system of record for fulfillment. If you allow CRM users to update order status, you create two sources of truth and neither is reliable.
 
@@ -131,4 +131,4 @@ Review daily for the first month after go-live, weekly after stabilization. Dupl
 
 Begin with customer master sync and opportunity-to-order handoff. These two flows deliver the most value and expose integration design issues early. Get ID mapping, conflict resolution, and error handling right before adding inventory visibility and pricing sync.
 
-ERP-CRM integration is not a one-time project. It is an operational capability that needs monitoring, error resolution, and ongoing tuning as both systems evolve. For governance patterns around automated handoffs, see the [ERP-CRM integration automation deployment guide](/blog/erp-crm-integration-automation-deployment-guide).
+ERP-CRM integration is not a one-time project. It is an operational capability that needs monitoring, error resolution, and ongoing tuning as both systems evolve. For governance patterns around automated handoffs, see [ERP-CRM handoff automation](/blog/erp-crm-handoff-automation).

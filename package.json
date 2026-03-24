@@ -22,9 +22,18 @@
     "analytics:discover": "node scripts/analytics-discover.mjs",
     "metrics:ingest": "node scripts/metrics-ingest.mjs",
     "indexnow:submit": "node scripts/indexnow-submit.mjs",
-    "indexnow:dry-run": "node scripts/indexnow-submit.mjs --dry-run"
+    "indexnow:dry-run": "node scripts/indexnow-submit.mjs --dry-run",
+    "research:import": "node scripts/import-research-library.mjs",
+    "growth:daily": "node scripts/growth-daily-plan.mjs",
+    "seo:health": "node scripts/seo-health-check.mjs",
+    "seo:war-room": "node scripts/seo-war-room.mjs",
+    "seo:swarm": "node scripts/seo-swarm.mjs",
+    "offpage:kpi-rollup": "node scripts/offpage/kpi-rollup.mjs",
+    "offpage:queue": "node scripts/offpage/outreach-queue.mjs",
+    "offpage:directories": "node scripts/offpage/directory-status.mjs"
   },
   "dependencies": {
+    "cheerio": "^1.2.0",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.11.1",
     "next": "16.1.6",
@@ -34,7 +43,9 @@
     "react-markdown": "^10.1.0",
     "rehype-highlight": "^7.0.2",
     "rehype-sanitize": "^6.0.0",
-    "remark-gfm": "^4.0.1"
+    "remark-gfm": "^4.0.1",
+    "turndown": "^7.2.2",
+    "turndown-plugin-gfm": "^1.0.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

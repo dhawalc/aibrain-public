@@ -1,19 +1,32 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import EmailCapture from '@/components/email-capture'
 import { AUTHOR_NAME, AUTHOR_PATH, AUTHOR_TITLE } from '@/lib/brand'
-import { REQUEST_DEMO_URL } from '@/lib/site'
+import { getAllArticles } from '@/lib/blog'
+import { REQUEST_DEMO_URL, SITE_URL } from '@/lib/site'
 
-export const metadata = {
-  title: 'QorSync AI | Autonomous Enterprise Operations',
+export const metadata: Metadata = {
+  title: 'Enterprise AI Workflow Automation Software',
   description:
-    'QorSync AI is an autonomous enterprise control plane where AI agents handle up to 95% of operational work with human approvals at critical checkpoints.',
+    'QorSync AI is enterprise AI workflow automation software for governed agent execution across ERP, CRM, and ITSM systems with risk-tiered approvals.',
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: 'QorSync AI | Autonomous Enterprise',
-    description: 'System-agnostic agentic operations for discovery, execution, and governance.',
+    title: 'QorSync AI | Enterprise AI Workflow Automation Software',
+    description: 'Governed AI workflow automation across ERP, CRM, ITSM, and enterprise operations.',
+    url: SITE_URL,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'QorSync AI | Enterprise AI Workflow Automation Software',
+    description: 'Governed AI workflow automation across ERP, CRM, ITSM, and enterprise operations.',
   },
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  const latestPosts = (await getAllArticles()).slice(0, 6)
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900">
       <header className="border-b border-slate-800 bg-slate-950/50 backdrop-blur-sm">
@@ -28,6 +41,9 @@ export default function HomePage() {
             </div>
           </div>
           <nav className="hidden items-center gap-8 md:flex">
+            <Link href="/solutions" className="text-slate-300 transition hover:text-white">
+              Solutions
+            </Link>
             <Link href="/blog" className="text-slate-300 transition hover:text-white">
               Blog
             </Link>
@@ -66,10 +82,10 @@ export default function HomePage() {
               Request Demo
             </a>
             <Link
-              href="/blog"
+              href="/solutions"
               className="inline-flex items-center justify-center rounded-lg border border-slate-700 bg-slate-800 px-6 py-3 font-semibold text-white transition hover:bg-slate-700"
             >
-              Read Playbooks
+              Explore Solutions
             </Link>
           </div>
 
@@ -178,6 +194,112 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <section className="border-y border-slate-800 bg-slate-900/40 py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-sm uppercase tracking-[0.18em] text-[#26AAE3]">Enterprise Solutions</p>
+              <h2 className="mt-3 text-3xl font-bold text-white md:text-4xl">Start with your highest-impact workflow</h2>
+            </div>
+            <Link href="/solutions" className="text-sm font-semibold text-cyan-300 hover:text-cyan-200">
+              View all solutions
+            </Link>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            <Link
+              href="/solutions/ai-approval-workflow-software"
+              className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 transition hover:border-cyan-500/50"
+            >
+              <h3 className="text-xl font-bold text-white">AI Approval Workflow Software</h3>
+              <p className="mt-3 text-sm text-slate-300">
+                Build risk-tiered approvals with SLA routing, escalation logic, and complete decision audit trails.
+              </p>
+            </Link>
+            <Link
+              href="/solutions/enterprise-agent-governance"
+              className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 transition hover:border-cyan-500/50"
+            >
+              <h3 className="text-xl font-bold text-white">Enterprise Agent Governance</h3>
+              <p className="mt-3 text-sm text-slate-300">
+                Define policy boundaries, human checkpoints, and operational controls for autonomous enterprise agents.
+              </p>
+            </Link>
+            <Link
+              href="/solutions/erp-crm-automation"
+              className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 transition hover:border-cyan-500/50"
+            >
+              <h3 className="text-xl font-bold text-white">ERP and CRM Automation</h3>
+              <p className="mt-3 text-sm text-slate-300">
+                Orchestrate governed actions across SAP, Oracle, NetSuite, Salesforce, and ServiceNow workflows.
+              </p>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="mb-10">
+          <p className="text-sm uppercase tracking-[0.18em] text-[#26AAE3]">Featured Guides</p>
+          <h2 className="mt-3 text-3xl font-bold text-white md:text-4xl">Top Resources for Enterprise AI Teams</h2>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {[
+            { href: '/blog/ai-approval-workflow', title: 'AI Approval Workflow Design', desc: 'Build risk-tiered approvals with SLA routing, escalation logic, and governance controls.' },
+            { href: '/blog/hitl-governance-design-patterns', title: 'HITL Governance Design Patterns', desc: 'Scale autonomous agents safely with human-in-the-loop governance patterns.' },
+            { href: '/blog/enterprise-agent-governance-checklist', title: 'Agent Governance Checklist', desc: 'Define controls, ownership, and human checkpoints for enterprise AI agent deployments.' },
+            { href: '/blog/ai-agent-risk-tiering-framework', title: 'AI Agent Risk Tiering Framework', desc: 'Design risk-tiered autonomy with approval gates and rollback controls.' },
+            { href: '/blog/enterprise-task-routing-with-ai-agents', title: 'Enterprise Task Routing', desc: 'Architect AI agent routing with queue policies, escalation paths, and reliability controls.' },
+          ].map((guide) => (
+            <Link
+              key={guide.href}
+              href={guide.href}
+              className="group rounded-xl border border-slate-800 bg-slate-900/60 p-5 transition hover:border-cyan-500/50"
+            >
+              <h3 className="font-bold text-white group-hover:text-cyan-300">{guide.title}</h3>
+              <p className="mt-2 text-sm text-slate-400">{guide.desc}</p>
+              <span className="mt-3 inline-flex text-xs font-semibold text-cyan-300">Read guide</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {latestPosts.length > 0 ? (
+        <section className="mx-auto max-w-7xl px-6 pb-10">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-sm uppercase tracking-[0.18em] text-[#26AAE3]">Latest Insights</p>
+              <h2 className="mt-3 text-3xl font-bold text-white md:text-4xl">New Playbooks from the Blog</h2>
+            </div>
+            <Link href="/blog" className="text-sm font-semibold text-cyan-300 hover:text-cyan-200">
+              View all articles
+            </Link>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {latestPosts.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="group rounded-2xl border border-slate-800 bg-slate-900/60 p-6 transition hover:border-cyan-500/50 hover:bg-slate-900"
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#26AAE3]">{post.category}</p>
+                <h3 className="mt-3 line-clamp-2 text-xl font-bold text-white transition group-hover:text-cyan-300">{post.title}</h3>
+                <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-slate-400">{post.excerpt}</p>
+                <div className="mt-5 flex items-center justify-between">
+                  <time className="text-xs text-slate-500">
+                    {new Date(post.date).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </time>
+                  <span className="text-sm font-semibold text-cyan-300 transition group-hover:translate-x-1">Read article</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <section className="border-y border-slate-800 bg-slate-900/50 py-20">
         <div className="mx-auto max-w-7xl px-6">
