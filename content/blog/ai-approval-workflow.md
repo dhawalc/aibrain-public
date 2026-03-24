@@ -143,9 +143,11 @@ The goal is not to remove humans from approval decisions. It is to remove humans
 
 When 70-80% of your approvals are auto-resolved with a full audit trail, your team stops being a bottleneck and starts being a control layer. That is the difference between automation that scales and automation that gets shut down after the first incident.
 
-## Related Implementation Resources
+## Related Resources
 
-- [AI Agent Risk Tiering Framework](/blog/ai-agent-risk-tiering-framework)
-- [Enterprise Task Routing with AI Agents](/blog/enterprise-task-routing-with-ai-agents)
-- [Human-in-the-Loop Governance Design Patterns](/blog/hitl-governance-design-patterns)
-- [Agent Governance Risk Matrix Tool](/tools/agent-governance-risk-matrix)
+- [HITL Governance Design Patterns](/blog/hitl-governance-design-patterns) — Scale autonomous agents safely with human-in-the-loop approval gates and escalation controls
+- [Enterprise Agent Governance Checklist](/blog/enterprise-agent-governance-checklist) — 40 production-grade questions to validate approval boundaries, rollback readiness, and audit controls
+- [AI Agent Risk Tiering Framework](/blog/ai-agent-risk-tiering-framework) — Score agent actions across four dimensions to set approval tiers that balance speed and control
+- [Enterprise Task Routing with AI Agents](/blog/enterprise-task-routing-with-ai-agents) — Design intelligent queue policies, SLA enforcement, and escalation paths for agent-routed work
+- [Calculate Your Approval Workflow ROI](/tools/approval-workflow-roi-calculator) — Free interactive tool to estimate hours saved and cycle-time improvement
+- [Assess Your Agent Risk Profile](/tools/agent-governance-risk-matrix) — Interactive risk matrix to classify agent actions by exposure and impact

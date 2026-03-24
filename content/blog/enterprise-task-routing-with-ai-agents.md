@@ -112,9 +112,11 @@ Task routing is the foundation, but routing decisions often trigger downstream w
 
 Routing is not a configuration problem -- it is a classification problem. Rules-based systems fail because they cannot interpret context, compute priority from real signals, or learn from outcomes. AI agents that classify intent, score urgency, match skills, and auto-resolve simple tasks cut resolution time by 50-70% and free your senior staff to work on problems that actually need them.
 
-## Related Implementation Resources
+## Related Resources
 
-- [AI Approval Workflow Design Template](/blog/ai-approval-workflow)
-- [AI Agent Risk Tiering Framework](/blog/ai-agent-risk-tiering-framework)
-- [Enterprise Agent Governance Checklist](/blog/enterprise-agent-governance-checklist)
-- [Automation Readiness Assessment](/tools/automation-readiness-assessment)
+- [AI Approval Workflow Design](/blog/ai-approval-workflow) — Build structured approval pipelines with risk scoring, SLA routing, and escalation logic for routed work
+- [HITL Governance Design Patterns](/blog/hitl-governance-design-patterns) — Human-in-the-loop patterns for approval gates, post-action review, and exception-based escalation
+- [AI Agent Risk Tiering Framework](/blog/ai-agent-risk-tiering-framework) — Score agent actions by financial exposure, system impact, and reversibility to set the right controls
+- [Enterprise Agent Governance Checklist](/blog/enterprise-agent-governance-checklist) — 40 questions to validate approval boundaries, audit coverage, and rollback readiness before deployment
+- [Check Your Automation Readiness](/tools/automation-readiness-assessment) — Free assessment to evaluate whether your routing workflows are ready for AI-driven automation
+- [Calculate Your Approval Workflow ROI](/tools/approval-workflow-roi-calculator) — Estimate hours saved by automating your routing and approval pipeline

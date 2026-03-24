@@ -162,9 +162,11 @@ A checklist tells you where you stand. It does not tell you how to fix the gaps.
 
 Start with the red flags. Fix those first. Then work through the remaining gaps category by category. The checklist is the starting line, not the finish line.
 
-## Related Implementation Resources
+## Related Resources
 
-- [AI Agent Risk Tiering Framework](/blog/ai-agent-risk-tiering-framework)
-- [AI Approval Workflow Design Template](/blog/ai-approval-workflow)
-- [Human-in-the-Loop Governance Design Patterns](/blog/hitl-governance-design-patterns)
-- [Automation Readiness Assessment](/tools/automation-readiness-assessment)
+- [AI Approval Workflow Design](/blog/ai-approval-workflow) — Build structured approval pipelines with risk scoring, SLA routing, and complete audit trails
+- [HITL Governance Design Patterns](/blog/hitl-governance-design-patterns) — Four production-tested patterns for pre-action gates, post-action review, and exception-based escalation
+- [AI Agent Risk Tiering Framework](/blog/ai-agent-risk-tiering-framework) — Score every agent action across four dimensions to assign the right tier of autonomy and oversight
+- [Enterprise Task Routing with AI Agents](/blog/enterprise-task-routing-with-ai-agents) — Intelligent queue policies and SLA enforcement for agent-routed work items
+- [Check Your Automation Readiness](/tools/automation-readiness-assessment) — Free assessment tool to evaluate whether your workflows are ready for agent-driven automation
+- [Assess Your Agent Risk Profile](/tools/agent-governance-risk-matrix) — Interactive risk matrix to classify agent actions by financial exposure and system impact

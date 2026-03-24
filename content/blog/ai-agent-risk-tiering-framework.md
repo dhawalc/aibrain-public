@@ -125,9 +125,11 @@ If your governance overhead exceeds 5%, start by examining whether Tier 2 review
 
 Risk tiering is not about limiting agents. It is about giving each agent action exactly the right level of autonomy and oversight based on what can actually go wrong. Score across four dimensions, map to three tiers with concrete control patterns, let agents earn their way to more autonomy through track record, and measure whether your tiers are calibrated correctly. That is how you move from "AI is too risky" to "AI is appropriately governed" with 385+ agents running in production across your enterprise stack.
 
-## Related Implementation Resources
+## Related Resources
 
-- [AI Approval Workflow Design Template](/blog/ai-approval-workflow)
-- [Enterprise Agent Governance Checklist (40 Questions)](/blog/enterprise-agent-governance-checklist)
-- [Human-in-the-Loop Governance Design Patterns](/blog/hitl-governance-design-patterns)
-- [Approval Workflow ROI Calculator](/tools/approval-workflow-roi-calculator)
+- [AI Approval Workflow Design](/blog/ai-approval-workflow) — Build risk-scored approval pipelines with SLA routing, escalation logic, and full audit trails
+- [HITL Governance Design Patterns](/blog/hitl-governance-design-patterns) — Pre-action gates, post-action review, and continuous monitoring patterns for each risk tier
+- [Enterprise Agent Governance Checklist](/blog/enterprise-agent-governance-checklist) — 40 production-grade questions to validate risk classification, rollback readiness, and compliance controls
+- [Enterprise Task Routing with AI Agents](/blog/enterprise-task-routing-with-ai-agents) — Design intelligent routing with intent classification, priority scoring, and SLA enforcement
+- [Assess Your Agent Risk Profile](/tools/agent-governance-risk-matrix) — Interactive tool to score and classify your own agent actions across the four risk dimensions
+- [Calculate Your Approval Workflow ROI](/tools/approval-workflow-roi-calculator) — Estimate the hours saved and cost reduction from tiered approval automation

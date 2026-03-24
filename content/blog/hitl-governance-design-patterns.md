@@ -137,9 +137,11 @@ HITL governance is the control architecture that determines whether your agent s
 
 Design governance around actions and risk tiers. Make it fast enough that nobody routes around it. Make it auditable enough that compliance teams trust it. Make it impossible to bypass. That is how 385+ agents earn trust in production.
 
-## Related Implementation Resources
+## Related Resources
 
-- [AI Agent Risk Tiering Framework](/blog/ai-agent-risk-tiering-framework)
-- [AI Approval Workflow Design Template](/blog/ai-approval-workflow)
-- [Enterprise Agent Governance Checklist](/blog/enterprise-agent-governance-checklist)
-- [Agent Governance Risk Matrix Tool](/tools/agent-governance-risk-matrix)
+- [AI Approval Workflow Design](/blog/ai-approval-workflow) — Build risk-scored approval pipelines with SLA routing, escalation logic, and full audit trails
+- [Enterprise Agent Governance Checklist](/blog/enterprise-agent-governance-checklist) — 40 concrete questions to validate your governance controls before any agent touches production
+- [AI Agent Risk Tiering Framework](/blog/ai-agent-risk-tiering-framework) — Score agent actions by financial exposure, system impact, reversibility, and regulatory scope
+- [Enterprise Task Routing with AI Agents](/blog/enterprise-task-routing-with-ai-agents) — Intent classification and priority scoring pipelines for intelligent work-item routing
+- [Assess Your Agent Risk Profile](/tools/agent-governance-risk-matrix) — Interactive tool to score and classify agent actions across the four governance dimensions
+- [Calculate Your Approval Workflow ROI](/tools/approval-workflow-roi-calculator) — Estimate hours saved and cost reduction from automated approval workflows
